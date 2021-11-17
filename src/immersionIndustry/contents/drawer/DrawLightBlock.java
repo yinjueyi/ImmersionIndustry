@@ -21,7 +21,6 @@ public class DrawLightBlock extends DrawBlock {
   
   @Override
   public void draw(GenericCrafterBuild build){
-    Draw.rect(build.block.region, build.x, build.y, build.block.rotate ? build.rotdeg() : 0);
     Draw.color(IMColors.colorPrimary,IMColors.colorDarkPrimary,build.warmup);
     Draw.z(Layer.effect);
     Draw.alpha((0.3f + Mathf.absin(Time.time, 2f + build.progress * 2f, 0.3f + build.progress * 0.05f)) * build.warmup);
@@ -34,6 +33,8 @@ public class DrawLightBlock extends DrawBlock {
     Lines.lineAngleCenter(build.x + Mathf.sin(build.totalProgress, 20f, tilesize / 2f * build.block.size - 2f), build.y, 90, build.block.size * tilesize - 4f);
     
     Draw.reset();
+    
+    Draw.rect(build.block.region, build.x, build.y, build.block.rotate ? build.rotdeg() : 0);
   }
   
   @Override
