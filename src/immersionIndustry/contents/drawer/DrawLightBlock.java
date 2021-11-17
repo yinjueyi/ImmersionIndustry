@@ -25,27 +25,14 @@ public class DrawLightBlock extends DrawBlock {
     Draw.color(IMColors.colorPrimary,IMColors.colorDarkPrimary,build.warmup);
     Draw.z(Layer.effect);
     Draw.alpha((0.3f + Mathf.absin(Time.time, 2f + build.progress * 2f, 0.3f + build.progress * 0.05f)) * build.warmup);
-    Draw.blend(Blending.additive);
-    Draw.draw(Layer.blockUnder, () -> {
-      Shaders.build.region = light;
-      Shaders.build.progress = build.progress;
-      Shaders.build.color.set(Tmp.c1.set(IMColors.colorPrimary).lerp(IMColors.colorDarkPrimary, build.warmup));
-      Shaders.build.color.a = build.warmup;
-      Shaders.build.time = -build.totalProgress / 20f;
-      
-      Draw.shader(Shaders.build);
-      Draw.rect(light, build.x, build.y, build.rotation);
-      Draw.shader();
-      
-      Draw.color(IMColors.colorDarkPrimary,IMColors.colorPrimary,build.warmup);
-      Draw.alpha(build.warmup);
-      
-      Lines.lineAngleCenter(build.x + Mathf.sin(build.totalProgress, 20f, tilesize / 2f * build.block.size - 2f), build.y, 90, build.block.size * tilesize - 4f);
-      
-      Draw.reset();
-    });
     
-    Draw.blend();
+    Draw.rect(light, build.x, build.y, build.rotation);
+    
+    Draw.alpha(build.warmup);
+    Draw.color(IMColors.colorDarkPrimary,IMColors.colorPrimary,build.warmup);
+    
+    Lines.lineAngleCenter(build.x + Mathf.sin(build.totalProgress, 20f, tilesize / 2f * build.block.size - 2f), build.y, 90, build.block.size * tilesize - 4f);
+    
     Draw.reset();
   }
   
