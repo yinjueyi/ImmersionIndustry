@@ -10,6 +10,7 @@ import mindustry.graphics.Layer;
 import mindustry.graphics.Drawf;
 import mindustry.graphics.Shaders;
 import mindustry.world.*;
+import mindustry.world.blocks.production.GenericCrafter;
 import mindustry.world.blocks.production.GenericCrafter.*;
 import static mindustry.Vars.*;
 
