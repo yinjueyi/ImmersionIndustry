@@ -28,17 +28,13 @@ public class DrawLightBlock extends DrawBlock {
     Draw.color(IMColors.colorPrimary,IMColors.colorDarkPrimary,build.warmup);
     Draw.z(Layer.effect);
     
-    if(build.efficiency() > 0) {
-      GenericCrafter block = (GenericCrafter) build.block;
-      if(Mathf.chanceDelta(block.updateEffectChance)){
-        IMFx.absorbedEnergy.at(build.x + Mathf.range(block.size * tilesize), build.y + Mathf.range(block.size * tilesize),build.rotation,build);
-      }
+    Lines.stroke((0.7f + Mathf.absin(20, 0.7f)), IMColors.colorPrimary);
+    Lines.square(build.x,build.y,(build.block.size * tilesize) / 3,90 + Time.time);
+    
+    if(Mathf.chanceDelta(0.04f)){
+      IMFx.crystallizationEnergy.at(build.x + Mathf.range(build.block.size * tilesize), build.y + Mathf.range(build.block.size * tilesize),build.rotation,build);
     }
-    for(int i = 0; i < 5 ; i++){
-      float rot = build.rotation + i * 360f/5 - Time.time * 0.5f;
-      Lines.swirl(build.x, build.y, build.block.size * 4 + 3f, 0.14f, rot);
-      Lines.swirl(build.x, build.y, build.block.size * 4 + 8f + Mathf.range(build.block.size * tilesize), 0.14f, rot);
-    }
+    
     Drawf.light(build.x, build.y,build.block.size * tilesize * 1.5f, IMColors.colorPrimary, build.warmup);
     Draw.reset();
   }
