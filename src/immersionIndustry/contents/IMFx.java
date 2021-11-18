@@ -39,7 +39,7 @@ import static mindustry.Vars.*;
 import immersionIndustry.IMColors;
 
 public class IMFx implements ContentList {
-  public static Effect dispersion,shockWave,absorbedEnergy;
+  public static Effect dispersion,shockWave,absorbedEnergy,crystallizationEnergy;
   
   @Override
   public void load() {
@@ -50,10 +50,26 @@ public class IMFx implements ContentList {
       });
     });
     
-    absorbedEnergy = new Effect(80f, e -> {
-      Draw.z(Layer.effect);
-      color(IMColors.colorPrimary,IMColors.colorDarkPrimary,e.fout());
+    crystallizationEnergy = new Effect(80f, e -> {
       if(e.data instanceof Building entity) {
+        Draw.z(Layer.effect);
+        color(IMColors.colorPrimary,IMColors.colorDarkPrimary,e.fout());
+        Vec2 vec = new Vec2(e.x,e.y);
+        vec.lerp(entity.x, entity.y, Interp.sineIn.apply(e.fin()));
+        square.circle(e.x, e.y, 2 * e.fslope());
+        Draw.color();
+        square.circle(e.x, e.y, 1 * e.fslope());
+        Draw.alpha(e.fslope());
+        Fill.rect();
+        Lines.stroke((0.7f + Mathf.absin(20, 0.7f)));
+        Lines.line(vec.x,vec.y,e.x,e.y);
+      }
+    });
+    
+    absorbedEnergy = new Effect(80f, e -> {
+      if(e.data instanceof Building entity) {
+        Draw.z(Layer.effect);
+        color(IMColors.colorPrimary,IMColors.colorDarkPrimary,e.fout());
         Vec2 vec = new Vec2(e.x,e.y);
         vec.lerp(entity.x, entity.y, Interp.sineIn.apply(e.fin()));
         Fill.circle(e.x, e.y, 2 * e.fslope());
