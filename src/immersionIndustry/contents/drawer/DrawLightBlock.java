@@ -14,6 +14,7 @@ import mindustry.world.blocks.production.GenericCrafter.*;
 import static mindustry.Vars.*;
 
 import immersionIndustry.IMColors;
+import immersionIndustry.contents.IMFx;
 
 public class DrawLightBlock extends DrawBlock {
   
@@ -21,20 +22,24 @@ public class DrawLightBlock extends DrawBlock {
   
   @Override
   public void draw(GenericCrafterBuild build){
+    Draw.rect(build.block.region, build.x, build.y, build.block.rotate ? build.rotdeg() : 0);
+    
     Draw.color(IMColors.colorPrimary,IMColors.colorDarkPrimary,build.warmup);
     Draw.z(Layer.effect);
-    Draw.alpha((0.3f + Mathf.absin(Time.time, 2f + build.progress * 2f, 0.3f + build.progress * 0.05f)) * build.warmup);
     
-    Draw.rect(light, build.x, build.y, build.rotation);
-    
-    Draw.alpha(build.warmup);
-    Draw.color(IMColors.colorDarkPrimary,IMColors.colorPrimary,build.warmup);
-    
-    Lines.lineAngleCenter(build.x + Mathf.sin(build.totalProgress, 20f, tilesize / 2f * build.block.size - 2f), build.y, 90, build.block.size * tilesize - 4f);
-    
+    if(build.efficiency() > 0) {
+      GenericCrafter block = (GenericCrafter) build.block;
+      if(Mathf.chanceDelta(block.updateEffectChance)){
+        IMFx.absorbedEnergy.at(build.x + Mathf.range(block.size * tilesize), build.y + Mathf.range(block.size * tilesize),build.rotation,build);
+      }
+    }
+    for(int i = 0; i < 5 ; i++){
+      float rot = build.rotation + i * 360f/5 - Time.time * 0.5f;
+      Lines.swirl(build.x, build.y, build.block.size * 4 + 3f, 0.14f, rot);
+      Lines.swirl(build.x, build.y, build.block.size * 4 + 8f + Mathf.range(build.block.size * tilesize), 0.14f, rot);
+    }
+    Drawf.light(build.x, build.y,build.block.size * tilesize * 1.5f, IMColors.colorPrimary, build.warmup);
     Draw.reset();
-    
-    Draw.rect(build.block.region, build.x, build.y, build.block.rotate ? build.rotdeg() : 0);
   }
   
   @Override
