@@ -53,15 +53,12 @@ public class IMFx implements ContentList {
     crystallizationEnergy = new Effect(80f, e -> {
       if(e.data instanceof Building entity) {
         Draw.z(Layer.effect);
-        color(IMColors.colorPrimary,IMColors.colorDarkPrimary,e.fout());
+        color(IMColors.colorPrimary,IMColors.colorDarkPrimary,e.fslope());
         Vec2 vec = new Vec2(e.x,e.y);
         vec.lerp(entity.x, entity.y, Interp.sineIn.apply(e.fin()));
-        Fill.square(e.x, e.y, 2 * e.fslope());
+        Fill.square(vec.x, vec.y, 2 * e.fslope());
         Draw.color();
-        Fill.square(e.x, e.y, 1 * e.fslope());
-        Draw.alpha(e.fslope());
-        Lines.stroke((0.7f + Mathf.absin(20, 0.7f)));
-        Lines.line(vec.x,vec.y,e.x,e.y);
+        Fill.square(vec.x, vec.y, 1 * e.fslope());
       }
     });
     
