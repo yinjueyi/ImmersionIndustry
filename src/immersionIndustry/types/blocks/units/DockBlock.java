@@ -9,6 +9,7 @@ import arc.struct.*;
 import arc.util.*;
 import arc.util.io.*;
 import arc.scene.ui.layout.Table;
+import mindustry.ai.types.*;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.units.*;
@@ -55,7 +56,7 @@ public class DockBlock extends PayloadBlock {
     ship = new TransportShip("transport-ship");
   }
   
-  public class DockBlockBuild extends PayloadBlockBuild {
+  public class DockBlockBuild extends PayloadBlockBuild<UnitPayload> {
     
     public int link = -1;//连接的方块
     public Unit unit;
@@ -64,7 +65,7 @@ public class DockBlock extends PayloadBlock {
     public void updateTile(){
       
       Building link = world.build(this.link);
-      if(linkValid) {
+      if(linkValid()) {
         this.link = link.pos();
       }
       
@@ -86,7 +87,7 @@ public class DockBlock extends PayloadBlock {
         return false;
       }else if(other.block == block && other.team == team){
         link = other.pos();
-        if(unit = null) {
+        if(unit == null) {
           unit = ship.create(team);
           payload = new UnitPayload(unit);
         }
