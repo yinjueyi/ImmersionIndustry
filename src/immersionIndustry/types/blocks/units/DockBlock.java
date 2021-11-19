@@ -38,59 +38,39 @@ import immersionIndustry.contents.IMFx;
 /*
 *码头方块
 */
-public class DockBlock extends UnitFactory {
+public class DockBlock extends PayloadBlock {
+  
+  public int capacity = 800;
+  public TransportShip ship;
   
   public DockBlock(String name) {
     super(name);
-    plans = Seq.with(
-      new UnitPlan(UnitTypes.flare, 60f * 15, ItemStack.with(Items.silicon, 15))
-    );
+    rotate = true;
+    update = true;
+    group = BlockGroup.transportation;
+    hasItems = true;
+    itemCapacity = capacity;
+    outputsPayload = true;
+    ship = new TransportShip("transport-ship") {
+      
+    }
   }
   
-  public class DockBlockBuild extends UnitFactoryBuild {
+  public class DockBlockBuild extends PayloadBlockBuild {
     
     public int link = -1;//连接的方块
+    public Unit unit;
     
     @Override
     public void updateTile(){
-      if(currentPlan < 0 || currentPlan >= plans.size){
-        currentPlan = -1;
-      }
-    
-      if(consValid() && currentPlan != -1){
-        time += edelta() * speedScl * state.rules.unitBuildSpeed(team);
-        progress += edelta() * state.rules.unitBuildSpeed(team);
-        speedScl = Mathf.lerpDelta(speedScl, 1f, 0.05f);
-      }else{
-        speedScl = Mathf.lerpDelta(speedScl, 0f, 0.05f);
-      }
-    
-      moveOutPayload();
-    
-      if(currentPlan != -1 && payload == null){
-        UnitPlan plan = plans.get(currentPlan);
-        if(plan.unit.isBanned()){
-          currentPlan = -1;
-          return;
-      }
-    
-      if(progress >= plan.time && consValid()){
-        progress %= 1f;
-        payload = new UnitPayload(plan.unit.create(team));
-        payVector.setZero();
-        consume();
-        Events.fire(new UnitCreateEvent(payload.unit, this));
-                    }
-    
-        progress = Mathf.clamp(progress, 0, plan.time);
-      }else{
-          progress = 0f;
-      }
       
       Building link = world.build(this.link);
-      boolean hasLink = linkValid();
-      if(hasLink) {
+      if(linkValid) {
         this.link = link.pos();
+      }
+      
+      if(payload != null){
+        payload.update(false);
       }
     }
     
@@ -107,10 +87,14 @@ public class DockBlock extends UnitFactory {
         return false;
       }else if(other.block == block && other.team == team){
         link = other.pos();
-        return false;
+        if(unit = null) {
+          unit = ship.create(team);
+          payload = new UnitPayload(unit);
+        }
+        return true;
       }
       
-      return true;
+      return false;
     }
     
     @Override
@@ -134,6 +118,21 @@ public class DockBlock extends UnitFactory {
       DockBlockBuild other = (DockBlockBuild) world.build(this.link);
       return other.block == block && other.team == team;
     }
+  }
+  
+  public class TransportShip extends UnitType {
+    
+    public TransportShip(String name) {
+      super(name);
+      itemCapacity = capacity;
+    }
+    
+    //将该单位隐藏
+    @Override
+    public boolean isHidden(){
+      return true;
+    }
+    
   }
   
 }
