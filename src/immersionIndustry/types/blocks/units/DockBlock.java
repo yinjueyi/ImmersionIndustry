@@ -41,6 +41,7 @@ import immersionIndustry.contents.IMFx;
 public class DockBlock extends PayloadBlock {
   
   public int capacity = 800;
+  @EntityDef({Unitc.class, WaterMovec.class})
   public TransportShip ship;
   
   public DockBlock(String name) {
@@ -51,9 +52,7 @@ public class DockBlock extends PayloadBlock {
     hasItems = true;
     itemCapacity = capacity;
     outputsPayload = true;
-    ship = new TransportShip("transport-ship") {
-      
-    }
+    ship = new TransportShip("transport-ship");
   }
   
   public class DockBlockBuild extends PayloadBlockBuild {
@@ -125,6 +124,13 @@ public class DockBlock extends PayloadBlock {
     public TransportShip(String name) {
       super(name);
       itemCapacity = capacity;
+      speed = 1.1f;
+      drag = 0.13f;
+      hitSize = 10f;
+      health = 280;
+      accel = 0.4f;
+      rotateSpeed = 3f;
+      trailLength = 14;
     }
     
     //将该单位隐藏
