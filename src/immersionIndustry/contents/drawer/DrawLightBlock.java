@@ -31,7 +31,7 @@ public class DrawLightBlock extends DrawBlock {
     Lines.stroke((0.7f + Mathf.absin(20, 0.7f)), IMColors.colorPrimary);
     Lines.square(build.x,build.y,(build.block.size * tilesize) / 3,90 + Time.time);
     
-    if(Mathf.chanceDelta(0.04f)){
+    if(build.efficiency() > 0 && Mathf.chanceDelta(0.04f)){
       IMFx.crystallizationEnergy.at(build.x + Mathf.range(build.block.size * tilesize), build.y + Mathf.range(build.block.size * tilesize),build.rotation,build);
     }
     
