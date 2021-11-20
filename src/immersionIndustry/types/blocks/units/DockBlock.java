@@ -68,6 +68,8 @@ public class DockBlock extends UnitBlock {
       if(linkValid()) {
         this.link = link.pos();
       }
+      
+      moveOutPayload();
     }
     
     @Override
@@ -86,11 +88,13 @@ public class DockBlock extends UnitBlock {
         if(unit == null) {
           unit = ship.create(team);
           payload = new UnitPayload(unit);
+          payVector.setZero();
+          Events.fire(new UnitCreateEvent(payload.unit, this));
         }
-        return true;
+        return false;
       }
       
-      return false;
+      return true;
     }
     
     @Override
