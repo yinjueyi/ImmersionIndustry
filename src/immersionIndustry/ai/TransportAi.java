@@ -27,7 +27,7 @@ public class TransportAi extends AIController {
     if(from != null && to != null) {
       if(unit.inRange(to)) {
         if(bool) {
-          int i = to.get(to.items.first());
+          int i = to.items.get(to.items.first());
           if(i > 0) {
             unit.stack.set(to.items.first(),to.removeStack(to.items.first(),i));
             returnToBase();
