@@ -48,9 +48,9 @@ public class IMFx implements ContentList {
       vec.lerp(x2, y2, Interp.sineIn.apply(e.fin()));
       color(color,Color.white,e.fin());
       Fill.circle(vec.x, vec.y,6f);
-      randLenVectors(e.id, 6, 5 + 15 * e.fin(), (x, y) -> {
-		    Fill.square(vec.x + x, vec.y + y, 2 * e.fslope());
-		    Fill.square(vec.x - x, vec.y - y, 2 * e.fslope());
+      randLenVectors(e.id, 6, 5 + 15 * e.fin(), (rx, ry) -> {
+		    Fill.square(vec.x + rx, vec.y + ry, 2 * e.fslope());
+		    Fill.square(vec.x - rx, vec.y - ry, 2 * e.fslope());
 			});
       reset();
     }).at(x,y);
