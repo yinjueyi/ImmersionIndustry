@@ -13,6 +13,7 @@ import static mindustry.Vars.*;
 public class TransportAi extends AIController {
   
   Building from,to;
+  boolean bool;
   
   public TransportAi(Building from,Building to) {
     this.from = from;
@@ -24,11 +25,33 @@ public class TransportAi extends AIController {
   public void updateMovement() {
     
     if(from != null && to != null) {
-      
-      unit.movePref(vec.trns(unit.angleTo(to.x, to.y), unit.speed()));
+      if(unit.inRange(build)) {
+        if(bool) {
+          int i = to.get(to.first());
+          if(i > 0) {
+            unit.stack.set(to.first(),to.removeStack(to.first(),i));
+            returnToBase();
+          }
+        }else {
+          int i = to.acceptStack(unit.stack.item,unit.stack.amount,unit);
+          if(i > 0) {
+            to.handleStack(unit.stack.item,unit.stack.amount,unit);
+            returnToBase();
+          }
+        }
+      }else {
+        unit.movePref(vec.trns(unit.angleTo(to.x, to.y), unit.speed()));
+      }
     }
     
     faceTarget();
+  }
+  
+  public void returnToBase() {
+    bool = !bool;
+    Building build = from;
+    to = from;
+    from = build;
   }
   
 }
