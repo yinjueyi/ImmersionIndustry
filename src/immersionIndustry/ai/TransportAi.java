@@ -13,7 +13,6 @@ import static mindustry.Vars.*;
 public class TransportAi extends AIController {
   
   Building from,to;
-  boolean bool;
   
   public TransportAi(Building from,Building to) {
     this.from = from;
@@ -23,35 +22,27 @@ public class TransportAi extends AIController {
   
   @Override
   public void updateMovement() {
-    
-    if(from != null && to != null) {
+    if(from == null || to == null) return;
+    if(unit.stack.amount > 0) {
+      //运送物品
       if(unit.inRange(to)) {
-        if(bool) {
-          int i = to.items.get(to.items.first());
-          if(i > 0) {
-            unit.stack.set(to.items.first(),to.removeStack(to.items.first(),i));
-            returnToBase();
-          }
-        }else {
-          int i = to.acceptStack(unit.stack.item,unit.stack.amount,unit);
-          if(i > 0) {
-            to.handleStack(unit.stack.item,unit.stack.amount,unit);
-            returnToBase();
-          }
+        int i = to.acceptStack(unit.stack.item);
+        if(i > 0) {
+          to.handleStack(unit.stack.item,unit.stack.amount,unit);
         }
       }else {
         unit.movePref(vec.trns(unit.angleTo(to.x, to.y), unit.speed()));
       }
+    }else {
+      if(unit.inRange(from)) {
+        int i = from.removeStack(from.items.first(),unit.type.itemCapacity);
+        unit.stack.set(from.items.first(),i);
+      }else {
+        unit.movePref(vec.trns(unit.angleTo(from.x, from.y), unit.speed()));
+      }
     }
     
     faceTarget();
-  }
-  
-  public void returnToBase() {
-    bool = !bool;
-    Building build = from;
-    to = from;
-    from = build;
   }
   
 }
