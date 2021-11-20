@@ -30,7 +30,7 @@ public class TransportAi extends AIController {
         int i = to.acceptStack(unit.stack.item,unit.stack.amount,unit);
         if(i > 0) {
           to.handleStack(unit.stack.item,i,unit);
-          unit.stack.set(unit.stack.item,unit.stack.amount - i)
+          unit.stack.set(unit.stack.item,unit.stack.amount - i);
         }
       }else {
         unit.movePref(vec.trns(unit.angleTo(to.x, to.y), unit.speed()));
