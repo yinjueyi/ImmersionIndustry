@@ -19,7 +19,7 @@ public class TransportAi extends AIController {
   
   Building from,to;
   boolean wait;
-  float waitMultiple = 0.1;
+  float waitMultiple = 0.1f;
   
   public TransportAi(Building from,Building to) {
     this.from = from;
