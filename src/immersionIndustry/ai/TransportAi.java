@@ -12,18 +12,20 @@ import static mindustry.Vars.*;
 
 public class TransportAi extends AIController {
   
-  Building from;
+  Building from,to;
   
-  public TransportAi(Building from,Building target) {
+  public TransportAi(Building from,Building to) {
     this.from = from;
-    this.target = target;
+    this.to = to;
+    target = to;
   }
   
   @Override
   public void updateMovement() {
     
-    if(from != null && target != null) {
-      unit.movePref(vec.trns(unit.angleTo(target.x, target.y), unit.speed()));
+    if(from != null && to != null) {
+      
+      unit.movePref(vec.trns(unit.angleTo(to.x, to.y), unit.speed()));
     }
     
     faceTarget();
