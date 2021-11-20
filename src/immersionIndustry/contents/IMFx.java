@@ -41,6 +41,20 @@ import immersionIndustry.IMColors;
 public class IMFx implements ContentList {
   public static Effect dispersion,shockWave,absorbedEnergy,crystallizationEnergy;
   
+  public static void takeItemEffect(float x,float y,float x2,float y2,Color color,float lifeTime) {
+    new Effect(lifeTime, e -> {
+      Draw.z(Layer.effect);
+      Vec2 vec = new Vec2(e.x,e.y);
+      vec.lerp(x2, y2, Interp.sineIn.apply(e.fin()));
+      Draw.alpha(e.fslope());
+      color(Color.white);
+      Lines.stroke(2);
+      Lines.line(e.x,e.y,vec.x,vec.y);
+      color(color,Color.white,e.fslope());
+      Fill.square(vec.x, vec.y, 2);
+    }).at(x,y);
+  }
+  
   @Override
   public void load() {
     dispersion = new Effect(60f,e -> {
