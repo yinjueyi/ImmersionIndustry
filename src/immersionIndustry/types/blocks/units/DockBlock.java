@@ -68,7 +68,6 @@ public class DockBlock extends UnitBlock {
       Building link = world.build(this.link);
       if(linkValid()) {
         this.link = link.pos();
-        unit.move
       }
       
       moveOutPayload();
