@@ -19,7 +19,7 @@ public class TransportAi extends AIController {
   
   Building from,to;
   boolean wait;
-  float waitMultiple = 0.1f;
+  float waitTime = 160;
   
   public TransportAi(Building from,Building to) {
     this.from = from;
@@ -35,7 +35,6 @@ public class TransportAi extends AIController {
       if(unit.inRange(to)) {
         int i = to.acceptStack(unit.stack.item,unit.stack.amount,unit);
         if(i > 0) {
-          float waitTime = i < 600 ? 600 : i * waitMultiple;
           wait = true;
           IMFx.takeItemEffect(unit.x,unit.y,to.x,to.y,unit.stack.item.color,waitTime);
           Time.run(waitTime,() -> {
@@ -50,7 +49,6 @@ public class TransportAi extends AIController {
     }else {
       Item item = from.items.first();
       if(unit.inRange(from) && item != null) {
-        float waitTime = unit.stack.amount < 600 ? 600 : unit.stack.amount * waitMultiple;
         wait = true;
         IMFx.takeItemEffect(from.x,from.y,unit.x,unit.y,item.color,waitTime);
         Time.run(waitTime,() -> {
