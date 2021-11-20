@@ -139,7 +139,7 @@ public class DockBlock extends UnitBlock {
     public Unit create(Team team,UnitController controller){
       Unit unit = constructor.get();
       unit.team = team;
-      unit.setType(this,controller);
+      unit.setType(this);
       unit.controller(controller);
       unit.ammo = ammoCapacity;
       unit.elevation = flying ? 1f : 0;
