@@ -3,6 +3,7 @@ package immersionIndustry.ai;
 import mindustry.ai.types.*;
 import arc.math.*;
 import mindustry.ai.*;
+import mindustry.type.*;
 import mindustry.entities.units.*;
 import mindustry.gen.*;
 import mindustry.world.*;
