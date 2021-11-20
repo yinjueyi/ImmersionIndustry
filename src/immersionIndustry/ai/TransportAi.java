@@ -2,6 +2,7 @@ package immersionIndustry.ai;
 
 import mindustry.ai.types.*;
 import arc.math.*;
+import arc.util.*;
 import mindustry.ai.*;
 import mindustry.type.*;
 import mindustry.entities.units.*;
@@ -49,7 +50,7 @@ public class TransportAi extends AIController {
     }else {
       Item item = from.items.first();
       if(unit.inRange(from) && item != null) {
-        float waitTime = i < 600 ? 600 : unit.stack.amount * waitMultiple;
+        float waitTime = unit.stack.amount < 600 ? 600 : unit.stack.amount * waitMultiple;
         wait = true;
         IMFx.takeItemEffect(from.x,from.y,unit.x,unit.y,IMColors.colorPrimary,waitTime);
         Time.run(waitTime,() -> {
