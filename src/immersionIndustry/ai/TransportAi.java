@@ -26,7 +26,7 @@ public class TransportAi extends AIController {
     if(unit.stack.amount > 0) {
       //运送物品
       if(unit.inRange(to)) {
-        int i = to.acceptStack(unit.stack.item);
+        int i = to.acceptStack(unit.stack.item,unit.stack.amount,unit);
         if(i > 0) {
           to.handleStack(unit.stack.item,unit.stack.amount,unit);
         }
