@@ -22,7 +22,6 @@ import mindustry.type.*;
 import mindustry.ui.*;
 import mindustry.world.*;
 import mindustry.world.blocks.units.*;
-import mindustry.world.blocks.units.UnitFactory.*;
 import mindustry.world.blocks.payloads.*;
 import mindustry.world.blocks.environment.*;
 import mindustry.world.meta.*;
@@ -39,7 +38,7 @@ import immersionIndustry.contents.IMFx;
 /*
 *码头方块
 */
-public class DockBlock extends PayloadBlock {
+public class DockBlock extends UnitBlock {
   
   public int capacity = 800;
   @EntityDef({Unitc.class, WaterMovec.class})
@@ -56,7 +55,7 @@ public class DockBlock extends PayloadBlock {
     ship = new TransportShip("transport-ship");
   }
   
-  public class DockBlockBuild extends PayloadBlockBuild<UnitPayload> {
+  public class DockBlockBuild extends UnitBuild {
     
     public int link = -1;//连接的方块
     public Unit unit;
@@ -132,6 +131,9 @@ public class DockBlock extends PayloadBlock {
       accel = 0.4f;
       rotateSpeed = 3f;
       trailLength = 14;
+      defaultController = () -> {
+        new WaterMovec();
+      };
     }
     
     //将该单位隐藏
