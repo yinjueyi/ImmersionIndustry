@@ -14,7 +14,7 @@ public class TransportAi extends AIController {
   
   Building from,to;
   
-  public TransportAi(Building from,Building to) {
+  public void setFromTo(Building from,Building to) {
     this.from = from;
     this.to = to;
   }
