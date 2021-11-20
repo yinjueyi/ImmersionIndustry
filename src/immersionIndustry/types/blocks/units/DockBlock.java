@@ -35,7 +35,6 @@ import static arc.math.Angles.*;
 
 import immersionIndustry.IMColors;
 import immersionIndustry.contents.IMFx;
-import immersionIndustry.ai.TransportAi;
 
 /*
 *码头方块
@@ -68,6 +67,7 @@ public class DockBlock extends UnitBlock {
       Building link = world.build(this.link);
       if(linkValid()) {
         this.link = link.pos();
+        unit.movePref(new Vec2(link.x,link.y));
       }
       
       moveOutPayload();
@@ -91,7 +91,6 @@ public class DockBlock extends UnitBlock {
           payload = new UnitPayload(unit);
           payVector.setZero();
           Events.fire(new UnitCreateEvent(payload.unit, this));
-          unit.controller().setFromTo(this,other);
         }
         return false;
       }
@@ -127,7 +126,6 @@ public class DockBlock extends UnitBlock {
     public TransportShip(String name) {
       super(name);
       constructor = UnitWaterMove::create;
-      defaultController = () -> new TransportAi();
       itemCapacity = capacity;
       speed = 1.1f;
       drag = 0.13f;
