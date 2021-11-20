@@ -52,6 +52,7 @@ public class IMBlocks implements ContentList {
       health = 200*size*size;
       size = 5;
       requirements(Category.distribution, ItemStack.with(Items.silicon, 45,Items.titanium, 75,Items.lead,120));
+      floating = true;
     }};
     
     t1ChipFactory = new GenericCrafter("T1-chip-factory"){{
