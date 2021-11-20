@@ -70,7 +70,7 @@ public class DockBlock extends UnitBlock {
         this.link = link.pos();
         //在玩家解除控制后重新设置ai，不知道有啥其他好办法
         if(!(unit.controller() instanceof TransportAi) && !(unit.controller() instanceof Player)) {
-          unit.controller(new TransportAi(this,other));
+          unit.controller(new TransportAi(this,link));
         }
       }
       
@@ -140,7 +140,6 @@ public class DockBlock extends UnitBlock {
       rotateSpeed = 3f;
       trailLength = 14;
       range = 120;
-      naval = true;
     }
     
     public Unit create(Team team,UnitController controller){
