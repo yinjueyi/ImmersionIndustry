@@ -46,17 +46,13 @@ public class IMFx implements ContentList {
       Draw.z(Layer.effect);
       Vec2 vec = new Vec2(e.x,e.y);
       vec.lerp(x2, y2, Interp.sineIn.apply(e.fin()));
-      color(color);
-      Draw.alpha(e.fslope());
-      Lines.stroke(2);
-      Lines.line(e.x + tilesize,e.y,vec.x,vec.y);
-      Lines.line(e.x - tilesize,e.y,vec.x,vec.y);
-      
-      Fill.circle(vec.x, vec.y, 2 * e.fslope());
-      color();
-      Fill.circle(vec.x, vec.y, 1 * e.fslope());
-      
-      Drawf.dashLine(color,e.x,e.y,vec.x,vec.y);
+      color(color,Color.white,e.fin());
+      Fill.circle(vec.x, vec.y,6f);
+      randLenVectors(e.id, 6, 5 + 15 * e.fin(), (x, y) -> {
+		    Fill.square(vec.x + x, vec.y + y, 2 * e.fslope());
+		    Fill.square(vec.x - x, vec.y - y, 2 * e.fslope());
+			});
+      reset();
     }).at(x,y);
   }
   
