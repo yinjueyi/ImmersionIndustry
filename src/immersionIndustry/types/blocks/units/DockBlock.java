@@ -10,6 +10,7 @@ import arc.util.*;
 import arc.util.io.*;
 import arc.scene.ui.layout.Table;
 import mindustry.ai.types.*;
+import mindustry.ctype.*;
 import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.units.*;
@@ -41,7 +42,6 @@ import immersionIndustry.contents.IMFx;
 public class DockBlock extends UnitBlock {
   
   public int capacity = 800;
-  @EntityDef({Unitc.class, WaterMovec.class})
   public TransportShip ship;
   
   public DockBlock(String name) {
@@ -62,14 +62,10 @@ public class DockBlock extends UnitBlock {
     
     @Override
     public void updateTile(){
-      
+      super.updateTile();
       Building link = world.build(this.link);
       if(linkValid()) {
         this.link = link.pos();
-      }
-      
-      if(payload != null){
-        payload.update(false);
       }
     }
     
@@ -123,6 +119,7 @@ public class DockBlock extends UnitBlock {
     
     public TransportShip(String name) {
       super(name);
+      constructor = UnitWaterMove::create;
       itemCapacity = capacity;
       speed = 1.1f;
       drag = 0.13f;
@@ -131,9 +128,6 @@ public class DockBlock extends UnitBlock {
       accel = 0.4f;
       rotateSpeed = 3f;
       trailLength = 14;
-      defaultController = () -> {
-        new WaterMovec();
-      };
     }
     
     //将该单位隐藏
