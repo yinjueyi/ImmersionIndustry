@@ -91,7 +91,7 @@ public class DockBlock extends UnitBlock {
           payload = new UnitPayload(unit);
           payVector.setZero();
           Events.fire(new UnitCreateEvent(payload.unit, this));
-          unit.controller(new TransportAi(this,other));
+          unit.controller().setFromTo(this,other);
         }
         return false;
       }
@@ -127,6 +127,7 @@ public class DockBlock extends UnitBlock {
     public TransportShip(String name) {
       super(name);
       constructor = UnitWaterMove::create;
+      defaultController = () -> new TransportAi();
       itemCapacity = capacity;
       speed = 1.1f;
       drag = 0.13f;
