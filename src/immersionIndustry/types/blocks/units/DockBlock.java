@@ -52,6 +52,7 @@ public class DockBlock extends UnitBlock {
     hasItems = true;
     itemCapacity = capacity;
     outputsPayload = true;
+    configurable = true;
     ship = new TransportShip("transport-ship");
   }
   
