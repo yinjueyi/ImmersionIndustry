@@ -34,9 +34,10 @@ public class TransportAi extends AIController {
         unit.movePref(vec.trns(unit.angleTo(to.x, to.y), unit.speed()));
       }
     }else {
-      if(unit.inRange(from)) {
-        int i = from.removeStack(from.items.first(),unit.type.itemCapacity);
-        unit.stack.set(from.items.first(),i);
+      Item item = from.items.first();
+      if(unit.inRange(from) && item != null) {
+        int i = from.removeStack(item,unit.type.itemCapacity);
+        unit.stack.set(item,i);
       }else {
         unit.movePref(vec.trns(unit.angleTo(from.x, from.y), unit.speed()));
       }
