@@ -42,15 +42,16 @@ import immersionIndustry.ai.TransportAi;
 */
 public class DockBlock extends UnitBlock {
   
-  public int capacity = 80;
+  public int capacity = 800;
   public TransportShip ship;
   
   public DockBlock(String name) {
     super(name);
     rotate = true;
-    update = true;
-    group = BlockGroup.transportation;
+    hasPower = true;
     hasItems = true;
+    solid = true;
+    group = BlockGroup.transportation;
     itemCapacity = capacity;
     outputsPayload = true;
     configurable = true;
@@ -75,6 +76,11 @@ public class DockBlock extends UnitBlock {
       }
       
       moveOutPayload();
+    }
+    
+    @Override
+    public boolean acceptItem(Building source, Item item) {
+      return items.get(item) < getMaximumAccepted(item);
     }
     
     @Override
