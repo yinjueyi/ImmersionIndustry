@@ -42,7 +42,7 @@ import immersionIndustry.ai.TransportAi;
 */
 public class DockBlock extends UnitBlock {
   
-  public int capacity = 800;
+  public int capacity = 80;
   public TransportShip ship;
   
   public DockBlock(String name) {
@@ -68,6 +68,10 @@ public class DockBlock extends UnitBlock {
       Building link = world.build(this.link);
       if(linkValid()) {
         this.link = link.pos();
+        //在玩家解除控制后重新设置ai，不知道有啥其他好办法
+        if(!(unit.controller() instanceof TransportAi) && !(unit.controller() instanceof Player)) {
+          unit.controller(new TransportAi(this,other));
+        }
       }
       
       moveOutPayload();
@@ -75,6 +79,7 @@ public class DockBlock extends UnitBlock {
     
     @Override
     public boolean onConfigureTileTapped(Building other) {
+      
       if(this == other){
         if(link == -1) deselect();
         link = -1;
@@ -134,6 +139,8 @@ public class DockBlock extends UnitBlock {
       accel = 0.4f;
       rotateSpeed = 3f;
       trailLength = 14;
+      range = 120;
+      naval = true;
     }
     
     public Unit create(Team team,UnitController controller){
