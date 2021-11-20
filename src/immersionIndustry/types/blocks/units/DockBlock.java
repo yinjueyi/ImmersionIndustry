@@ -35,6 +35,7 @@ import static arc.math.Angles.*;
 
 import immersionIndustry.IMColors;
 import immersionIndustry.contents.IMFx;
+import immersionIndustry.ai.TransportAi;
 
 /*
 *码头方块
@@ -67,7 +68,6 @@ public class DockBlock extends UnitBlock {
       Building link = world.build(this.link);
       if(linkValid()) {
         this.link = link.pos();
-        unit.movePref(new Vec2(link.x,link.y));
       }
       
       moveOutPayload();
@@ -87,7 +87,7 @@ public class DockBlock extends UnitBlock {
       }else if(other.block == block && other.team == team){
         link = other.pos();
         if(unit == null) {
-          unit = ship.create(team);
+          unit = ship.create(team,new TransportAi(this,other));
           payload = new UnitPayload(unit);
           payVector.setZero();
           Events.fire(new UnitCreateEvent(payload.unit, this));
@@ -134,6 +134,17 @@ public class DockBlock extends UnitBlock {
       accel = 0.4f;
       rotateSpeed = 3f;
       trailLength = 14;
+    }
+    
+    public Unit create(Team team,UnitController controller){
+      Unit unit = constructor.get();
+      unit.team = team;
+      unit.setType(this,controller);
+      unit.controller(controller);
+      unit.ammo = ammoCapacity;
+      unit.elevation = flying ? 1f : 0;
+      unit.heal();
+      return unit;
     }
     
     //将该单位隐藏
