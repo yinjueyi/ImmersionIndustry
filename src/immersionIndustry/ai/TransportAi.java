@@ -25,11 +25,11 @@ public class TransportAi extends AIController {
   public void updateMovement() {
     
     if(from != null && to != null) {
-      if(unit.inRange(build)) {
+      if(unit.inRange(to)) {
         if(bool) {
-          int i = to.get(to.first());
+          int i = to.get(to.items.first());
           if(i > 0) {
-            unit.stack.set(to.first(),to.removeStack(to.first(),i));
+            unit.stack.set(to.items.first(),to.removeStack(to.items.first(),i));
             returnToBase();
           }
         }else {
