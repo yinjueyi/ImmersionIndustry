@@ -36,7 +36,7 @@ public class TransportAi extends AIController {
         int i = to.acceptStack(unit.stack.item,unit.stack.amount,unit);
         if(i > 0) {
           wait = true;
-          IMFx.takeItemEffect(unit.x,unit.y,to.x,to.y,unit.stack.item.color,waitTime);
+          IMFx.takeItemEffect(unit.x,unit.y,to.x,to.y,unit.stack.item.color,40);
           Time.run(waitTime,() -> {
             to.handleStack(unit.stack.item,i,unit);
             unit.stack.set(unit.stack.item,unit.stack.amount - i);
@@ -50,7 +50,7 @@ public class TransportAi extends AIController {
       Item item = from.items.first();
       if(unit.inRange(from) && item != null) {
         wait = true;
-        IMFx.takeItemEffect(from.x,from.y,unit.x,unit.y,item.color,waitTime);
+        IMFx.takeItemEffect(from.x,from.y,unit.x,unit.y,item.color,40);
         Time.run(waitTime,() -> {
           int i = from.removeStack(item,unit.type.itemCapacity);
           unit.stack.set(item,i);
