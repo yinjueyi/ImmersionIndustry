@@ -63,6 +63,9 @@ public class DockDialog extends BaseDialog {
     unlocked.row();
     unlocked.image(Tex.whiteui, Pal.accent).growX().height(3f).pad(4f);
     unlocked.row();
+    Table unlock = new Table();
+    unlock.add(Core.bundle.get("dockdialog-unlock"));
+    unlock.row();
     float h = Core.graphics.isPortrait() ? 90f : 80f;
     float w = Core.graphics.isPortrait() ? 330f : 600f;
     for(UpgradeData data : datas) {
@@ -72,10 +75,6 @@ public class DockDialog extends BaseDialog {
         unlock.add(new UpgradeItem(data,false)).size(w, h).padTop(5).row();
       }
     }
-    
-    Table unlock = new Table();
-    unlock.add(Core.bundle.get("dockdialog-unlock"));
-    unlock.row();
     
     cont.add(unlocked).row();
     cont.add(unlock).row();
