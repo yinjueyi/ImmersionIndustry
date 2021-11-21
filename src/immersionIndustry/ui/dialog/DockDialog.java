@@ -40,7 +40,7 @@ public class DockDialog extends BaseDialog {
     width = Core.graphics.isPortrait() ? 120f : 110f;
     height = Core.graphics.isPortrait() ? 330f : 600f;
     unlocked.row();
-    unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"升级","提升方块的属性",new Table() {
+    unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"码头","提升码头的属性",new Table() {
       {
         add("方块").right().row();
         ItemStack[] items = upgradeItems[entity.level];
@@ -48,7 +48,7 @@ public class DockDialog extends BaseDialog {
           add(new ItemImage(stack)).right();
         }
       }
-    })).size(width, height).padTop(5);
+    })).size(width, height).pad(6);
     
     unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"运输船","提升单位属性",new Table() {
       {
@@ -58,9 +58,9 @@ public class DockDialog extends BaseDialog {
           add(new ItemImage(stack)).right();
         }
       }
-    })).size(width, height).padTop(5);
+    })).size(width, height).pad(6);
     
-    unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"浮游炮","增加浮游炮",new Table() {
+    unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"浮游炮","修改浮游炮",new Table() {
       {
         add("武器").right().row();
         ItemStack[] items = upgradeItems[entity.level];
@@ -68,7 +68,7 @@ public class DockDialog extends BaseDialog {
           add(new ItemImage(stack)).right();
         }
       }
-    })).size(width, height).padTop(5);
+    })).size(width, height).pad(6);
     
     Table unlock = new Table();
     unlock.add(Core.bundle.get("dockdialog-unlock"));
@@ -89,19 +89,13 @@ public class DockDialog extends BaseDialog {
       width = Core.graphics.isPortrait() ? 120f : 110f;
       height = Core.graphics.isPortrait() ? 330f : 600f;
       
-      margin(12);
-      table(card -> {
-        card.setFillParent(true);
-        card.table(head -> {
-          head.add(title).left();
-          head.row();
-          head.labelWrap(description).color(Color.lightGray).left();
-        }).width(width).top();
-        card.row();
-        card.add(additional).width(width).bottom();
-        card.setWidth(width);
-        card.setHeight(height);
-      });
+      table(head -> {
+        head.add(title).left();
+        head.row();
+        head.labelWrap(description).color(Color.lightGray).left();
+      }).width(width).top();
+      row();
+      add(additional).width(width).bottom();
     }
     
   }
