@@ -7,15 +7,23 @@ import arc.graphics.g2d.*;
 import arc.scene.ui.*;
 import arc.scene.ui.layout.*;
 import arc.math.Angles;
+import mindustry.type.*;
 import mindustry.graphics.*;
 import mindustry.gen.*;
+import mindustry.ui.*;
 import mindustry.ui.dialogs.*;
+import mindustry.content.*;
 
 import immersionIndustry.IMColors;
 import immersionIndustry.contents.blocks.IMBlocks;
 import immersionIndustry.types.blocks.distribution.DockBlock.DockBlockBuild;
+import immersionIndustry.contents.IMItems;
 
 public class DockDialog extends BaseDialog {
+  
+  ItemSeq[] items = {
+    new ItemSeq(new Seq<ItemStack>(ItemStack.with(Items.silicon, 25,Items.titanium,12)))
+  };
   
   DockBlockBuild entity;
   
@@ -33,7 +41,11 @@ public class DockDialog extends BaseDialog {
     unlocked.row();
     float h = Core.graphics.isPortrait() ? 90f : 80f;
     float w = Core.graphics.isPortrait() ? 330f : 600f;
-    unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"升级","将此方块升级")).size(w, h).padTop(5).row();
+    unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"升级","将此方块升级"),new Table() {
+      {
+        add(new ItemsDisplay(items[entity.level]))
+      }
+    }).size(w, h).padTop(5).row();
     
     Table unlock = new Table();
     unlock.add(Core.bundle.get("dockdialog-unlock"));
@@ -44,7 +56,7 @@ public class DockDialog extends BaseDialog {
   
   public class UpgradeItem extends Table {
     
-    public UpgradeItem(Color color,TextureRegion icon,String title,String description) {
+    public UpgradeItem(Color color,TextureRegion icon,String title,String description,Table additional) {
       super(Tex.underline);
       
       float h = Core.graphics.isPortrait() ? 90f : 80f;
@@ -66,6 +78,8 @@ public class DockDialog extends BaseDialog {
         inset.add("[accent]" + title).growX().left();
         inset.row();
         inset.labelWrap(description).width(w - 100f).color(Color.lightGray).growX();
+        inset.row();
+        inset.add(additional);
       }).padLeft(8);
 
       button("解锁", () -> {
