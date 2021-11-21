@@ -85,11 +85,11 @@ public class DockDialog extends BaseDialog {
     float width,height;
     
     public UpgradeItem(Color color,TextureRegion icon,String title,String description,Table additional) {
-      super(new TextureRegionDrawable(icon));
+      super(Styles.black);
       width = Core.graphics.isPortrait() ? 120f : 110f;
       height = Core.graphics.isPortrait() ? 330f : 600f;
       
-      margin(0);
+      margin(12);
       table(card -> {
         card.setFillParent(true);
         card.table(head -> {
@@ -99,7 +99,8 @@ public class DockDialog extends BaseDialog {
         }).width(width).top();
         card.row();
         card.add(additional).width(width).bottom();
-      }).width(width).height(height);
+        card.width(width).height(height);
+      })
     }
     
   }
