@@ -16,7 +16,7 @@ import mindustry.ui.*;
 import mindustry.ui.dialogs.*;
 import mindustry.content.*;
 
-import static mindustry.Vars;
+import static mindustry.Vars.*;
 
 import immersionIndustry.IMColors;
 import immersionIndustry.contents.blocks.IMBlocks;
@@ -67,9 +67,9 @@ public class DockDialog extends BaseDialog {
     float w = Core.graphics.isPortrait() ? 330f : 600f;
     for(UpgradeData data : datas) {
       if(data.canShow()) {
-        unlocked.add(new UpgradeItem(data),true).size(w, h).padTop(5).row();
+        unlocked.add(new UpgradeItem(data,true)).size(w, h).padTop(5).row();
       }else if(data.b.get(entity)){
-        unlock.add(new UpgradeItem(data),false).size(w, h).padTop(5).row();
+        unlock.add(new UpgradeItem(data,false)).size(w, h).padTop(5).row();
       }
     }
     
@@ -98,7 +98,7 @@ public class DockDialog extends BaseDialog {
       
       table(i -> {
         i.background(Tex.buttonEdge3);
-        i.image(data.icon);
+        i.image(Icon.info);
       }).size(h - 5, h);
       
       table(inset -> {
