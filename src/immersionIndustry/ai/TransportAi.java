@@ -44,7 +44,8 @@ public class TransportAi extends AIController {
           });
         }
       }else {
-        unit.movePref(vec.trns(unit.angleTo(to.x, to.y), unit.speed()));
+        moveTarget(to);
+        //unit.movePref(vec.trns(unit.angleTo(to.x, to.y), unit.speed()));
       }
     }else {
       Item item = from.items.first();
@@ -57,11 +58,40 @@ public class TransportAi extends AIController {
           wait = false;
         });
       }else {
-        unit.movePref(vec.trns(unit.angleTo(from.x, from.y), unit.speed()));
+        moveTarget(from);
+        //unit.movePref(vec.trns(unit.angleTo(from.x, from.y), unit.speed()));
       }
     }
     
     faceTarget();
+  }
+  
+  private void moveTarget(Building to) {
+    unit.movePref(vec.trns(unit.angleTo(findNear(to)), unit.speed()));
+  }
+  
+  /*
+  * 寻找前往的下一个方块
+  * 根据单位所在的Tile的周围四个Tile计算曼哈顿距离，得到离目标最近的一个位置
+  */
+  private Tile findNear(Building to) {
+    Tile tile = unit.tileOn();
+    int value = -1;
+    int ti = 0;
+    for(int i = 0;i<4;i++) {
+      Tile t = tile.nearby(i);
+      int d = manhattanDistance(tile.x,tile.y,to.tile.x,to.tile.y);
+      if(value == -1 || value > d) {
+        value = d;
+        ti = t;
+      }
+    }
+    return ti;
+  }
+  
+  //计算曼哈顿距离
+  private int manhattanDistance(int x,int y,int x2,int y2) {
+    return Math.abs(x2-x) + Math.abs(y2-y);
   }
   
 }
