@@ -36,28 +36,34 @@ public class DockDialog extends BaseDialog {
     shouldPause = true;
     
     Table unlocked = new Table();
-    unlocked.add(Core.bundle.get("dockdialog-unlocked"));
-    unlocked.row();
-    unlocked.image(Tex.whiteui, Pal.accent).growX().height(3f).pad(4f);
-    unlocked.row();
     width = Core.graphics.isPortrait() ? 120f : 110f;
     height = Core.graphics.isPortrait() ? 330f : 600f;
-    unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"升级","将此方块升级",new Table() {
+    unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"升级","提升方块的属性",new Table() {
       {
-        add("方块").right().row();
+        add("方块").row();
         ItemStack[] items = upgradeItems[entity.level];
         for(ItemStack stack : items) {
-          add(new ItemImage(stack)).right();
+          add(new ItemImage(stack));
         }
       }
     })).size(width, height).padTop(5);
     
-    unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"升级","将此单位升级",new Table() {
+    unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"运输船","提升单位属性",new Table() {
       {
-        add("单位").right().row();
+        add("单位").row();
         ItemStack[] items = upgradeItems[entity.level];
         for(ItemStack stack : items) {
-          add(new ItemImage(stack)).right();
+          add(new ItemImage(stack));
+        }
+      }
+    })).size(width, height).padTop(5).pad(width/2);
+    
+    unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"浮游炮","增加浮游炮",new Table() {
+      {
+        add("武器").row();
+        ItemStack[] items = upgradeItems[entity.level];
+        for(ItemStack stack : items) {
+          add(new ItemImage(stack));
         }
       }
     })).size(width, height).padTop(5).pad(width/2);
@@ -85,19 +91,21 @@ public class DockDialog extends BaseDialog {
       margin(0);
       table(card -> {
         card.table(head -> {
-          head.add(title).growX().left();
+          head.add(title).growX();
           head.row();
-          head.labelWrap(description).width(width - 100f).color(Color.lightGray).growX();
+          head.labelWrap(description).color(Color.lightGray).growX();
         });
         card.row();
         card.table(img -> {
-          img.image().height(35).width(40f).color(color);
+          img.image().height(width-5).width(width).color(color.cpy().mul(0.8f, 0.8f, 0.8f, 1f));
           img.row();
-          img.image().height(5).width(40f).color(color.cpy().mul(0.8f, 0.8f, 0.8f, 1f));
-          img.image(icon).size(35, 35);
-          img.image().height(35).width(40f).color(color.cpy().mul(0.8f, 0.8f, 0.8f, 1f));
+          img.image().height(5).width(width).color(color);
           img.row();
-          img.image().height(5).width(40f).color(color);
+          img.image(icon).size(width, width);
+          img.row();
+          img.image().height(5).width(width).color(color);
+          img.row();
+          img.image().height(width-5).width(width).color(color.cpy().mul(0.8f, 0.8f, 0.8f, 1f));
         });
         card.row();
         card.add(additional);
