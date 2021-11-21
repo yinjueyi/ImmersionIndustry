@@ -132,7 +132,7 @@ public class DockBlock extends UnitBlock {
     public void buildConfiguration(Table table) {
       table.button("管理",() -> {
         showDockData(this);
-      })
+      });
     };
     
     protected boolean linkValid(){
