@@ -84,8 +84,7 @@ public class DockDialog extends BaseDialog {
     float width,height;
     
     public UpgradeItem(Color color,TextureRegion icon,String title,String description,Table additional) {
-      super(Styles.defaultb);
-      
+      super();
       width = Core.graphics.isPortrait() ? 120f : 110f;
       height = Core.graphics.isPortrait() ? 330f : 600f;
       
