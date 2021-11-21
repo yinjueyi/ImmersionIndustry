@@ -55,6 +55,9 @@ public class DockDialog extends BaseDialog {
     unlock.add(Core.bundle.get("dockdialog-unlock"));
     unlock.row();
     
+    cont.add(unlocked).row();
+    cont.add(unlock).row();
+    
     addCloseButton();
   }
   
