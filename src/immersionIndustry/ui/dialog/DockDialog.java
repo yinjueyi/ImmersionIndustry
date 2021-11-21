@@ -43,7 +43,7 @@ public class DockDialog extends BaseDialog {
     float w = Core.graphics.isPortrait() ? 330f : 600f;
     unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"升级","将此方块升级"),new Table() {
       {
-        add(new ItemsDisplay(items[entity.level]))
+        add(new ItemsDisplay(items[entity.level]));
       }
     }).size(w, h).padTop(5).row();
     
