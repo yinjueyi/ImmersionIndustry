@@ -36,12 +36,11 @@ import immersionIndustry.contents.IMItems;
 import immersionIndustry.contents.IMFx;
 import immersionIndustry.contents.drawer.*;
 import immersionIndustry.types.blocks.production.*;
-import immersionIndustry.types.blocks.units.*;
+import immersionIndustry.types.blocks.distribution.*;
 
 //实现ContentList
 public class IMBlocks implements ContentList {
   
-  //声明方块，目前没有制作方块，所以注释掉
   public static Block t1ChipFactory,collapseExtractor,collapseQuantumCultivation,dock;
   
   //在这里创建变量
