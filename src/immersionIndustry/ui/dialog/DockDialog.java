@@ -40,16 +40,27 @@ public class DockDialog extends BaseDialog {
     unlocked.row();
     unlocked.image(Tex.whiteui, Pal.accent).growX().height(3f).pad(4f);
     unlocked.row();
-    float h = Core.graphics.isPortrait() ? 90f : 80f;
-    float w = Core.graphics.isPortrait() ? 330f : 600f;
+    width = Core.graphics.isPortrait() ? 120f : 110f;
+    height = Core.graphics.isPortrait() ? 330f : 600f;
     unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"升级","将此方块升级",new Table() {
       {
+        add("方块").right().row();
         ItemStack[] items = upgradeItems[entity.level];
         for(ItemStack stack : items) {
-          add(new ItemImage(stack));
+          add(new ItemImage(stack)).right();
         }
       }
-    })).size(w, h).padTop(5).row();
+    })).size(width, height).padTop(5);
+    
+    unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"升级","将此单位升级",new Table() {
+      {
+        add("单位").right().row();
+        ItemStack[] items = upgradeItems[entity.level];
+        for(ItemStack stack : items) {
+          add(new ItemImage(stack)).right();
+        }
+      }
+    })).size(width, height).padTop(5).pad(width/2);
     
     Table unlock = new Table();
     unlock.add(Core.bundle.get("dockdialog-unlock"));
@@ -63,35 +74,34 @@ public class DockDialog extends BaseDialog {
   
   public class UpgradeItem extends Table {
     
+    float width,height;
+    
     public UpgradeItem(Color color,TextureRegion icon,String title,String description,Table additional) {
       super(Tex.underline);
       
-      float h = Core.graphics.isPortrait() ? 90f : 80f;
-      float w = Core.graphics.isPortrait() ? 330f : 600f;
+      width = Core.graphics.isPortrait() ? 120f : 110f;
+      height = Core.graphics.isPortrait() ? 330f : 600f;
       
       margin(0);
-      table(img -> {
-        img.image().height(h - 5).width(40f).color(color);
-        img.row();
-        img.image().height(5).width(40f).color(color.cpy().mul(0.8f, 0.8f, 0.8f, 1f));
-      }).expandY();
-      
-      table(i -> {
-        i.background(Tex.buttonEdge3);
-        i.image(icon);
-      }).size(h - 5, h);
-      
-      table(inset -> {
-        inset.add("[accent]" + title).growX().left();
-        inset.row();
-        inset.labelWrap(description).width(w - 100f).color(Color.lightGray).growX();
-        inset.row();
-        inset.add(additional);
-      }).padLeft(8);
-
-      button("解锁", () -> {
-        
-      }).size(h - 5, h);
+      table(card -> {
+        card.table(title -> {
+          title.add(title).growX().left();
+          title.row();
+          title.labelWrap(description).width(width - 100f).color(Color.lightGray).growX();
+        });
+        card.row();
+        card.table(img -> {
+          img.image().height(35).width(40f).color(color);
+          img.row();
+          img.image().height(5).width(40f).color(color.cpy().mul(0.8f, 0.8f, 0.8f, 1f));
+          img.image(icon).size(35, 35);
+          img.image().height(35).width(40f).color(color.cpy().mul(0.8f, 0.8f, 0.8f, 1f));
+          img.row();
+          img.image().height(5).width(40f).color(color);
+        });
+        card.row();
+        card.add(additional);
+      });
     }
     
   }
