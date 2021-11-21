@@ -30,7 +30,7 @@ public class DockDialog extends BaseDialog {
     new UpgradeData("升级","从0级升到1级",ItemStack.with(Items.silicon, 25,Items.titanium,12),0,entity -> {
       entity.level = 1;
     },entity -> {
-      return entity.level >= 1;;
+      return entity.level >= 1;
     }),
     new UpgradeData("升级","从1级升到2级",ItemStack.with(Items.silicon, 35,Items.titanium,22),1,entity -> {
       entity.level = 2;
