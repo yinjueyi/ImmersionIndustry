@@ -38,35 +38,36 @@ public class DockDialog extends BaseDialog {
     Table unlocked = new Table();
     width = Core.graphics.isPortrait() ? 120f : 110f;
     height = Core.graphics.isPortrait() ? 330f : 600f;
+    unlocked.row();
     unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"升级","提升方块的属性",new Table() {
       {
-        add("方块").row();
+        add("方块").right().row();
         ItemStack[] items = upgradeItems[entity.level];
         for(ItemStack stack : items) {
-          add(new ItemImage(stack));
+          add(new ItemImage(stack)).right();
         }
       }
     })).size(width, height).padTop(5);
     
     unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"运输船","提升单位属性",new Table() {
       {
-        add("单位").row();
+        add("单位").right().row();
         ItemStack[] items = upgradeItems[entity.level];
         for(ItemStack stack : items) {
-          add(new ItemImage(stack));
+          add(new ItemImage(stack)).right();
         }
       }
-    })).size(width, height).padTop(5).pad(width/2);
+    })).size(width, height).padTop(5);
     
     unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"浮游炮","增加浮游炮",new Table() {
       {
-        add("武器").row();
+        add("武器").right().row();
         ItemStack[] items = upgradeItems[entity.level];
         for(ItemStack stack : items) {
-          add(new ItemImage(stack));
+          add(new ItemImage(stack)).right();
         }
       }
-    })).size(width, height).padTop(5).pad(width/2);
+    })).size(width, height).padTop(5);
     
     Table unlock = new Table();
     unlock.add(Core.bundle.get("dockdialog-unlock"));
@@ -83,32 +84,25 @@ public class DockDialog extends BaseDialog {
     float width,height;
     
     public UpgradeItem(Color color,TextureRegion icon,String title,String description,Table additional) {
-      super(Tex.underline);
+      super(Styles.defaultb);
       
       width = Core.graphics.isPortrait() ? 120f : 110f;
       height = Core.graphics.isPortrait() ? 330f : 600f;
       
       margin(0);
+      table(background -> {
+        background.setFillParent(true);
+        background.image(icon).size(height,height);
+      });
       table(card -> {
+        card.setFillParent(true);
         card.table(head -> {
-          head.add(title).growX();
+          head.add(title).left();
           head.row();
-          head.labelWrap(description).color(Color.lightGray).growX();
-        });
+          head.labelWrap(description).color(Color.lightGray).left();
+        }).width(width).top();
         card.row();
-        card.table(img -> {
-          img.image().height(width-5).width(width).color(color.cpy().mul(0.8f, 0.8f, 0.8f, 1f));
-          img.row();
-          img.image().height(5).width(width).color(color);
-          img.row();
-          img.image(icon).size(width, width);
-          img.row();
-          img.image().height(5).width(width).color(color);
-          img.row();
-          img.image().height(width-5).width(width).color(color.cpy().mul(0.8f, 0.8f, 0.8f, 1f));
-        });
-        card.row();
-        card.add(additional);
+        card.add(additional).width(width).bottom();
       });
     }
     
