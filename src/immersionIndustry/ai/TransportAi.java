@@ -77,7 +77,7 @@ public class TransportAi extends AIController {
   private Tile findNear(Building to) {
     Tile tile = unit.tileOn();
     int value = -1;
-    Tile ti;
+    Tile ti = tile;
     for(int i = 0;i<4;i++) {
       Tile t = tile.nearby(i);
       if(t.floor().isLiquid) {
@@ -88,7 +88,7 @@ public class TransportAi extends AIController {
         }
       }
     }
-    return ti == null ? tile : ti;
+    return ti;
   }
   
   //计算曼哈顿距离
