@@ -13,10 +13,8 @@ import immersionIndustry.IMColors;
 import immersionIndustry.contents.blocks.IMBlocks;
 import immersionIndustry.types.blocks.units.DockBlock.DockBlockBuild;
 
-public DockDialog extends BaseDialog {
+public class DockDialog extends BaseDialog {
   
-  public ItemsDisplay itemDisplay;
-  public View view;
   DockBlockBuild entity;
   
   public DockDialog(DockBlockBuild entity) {
