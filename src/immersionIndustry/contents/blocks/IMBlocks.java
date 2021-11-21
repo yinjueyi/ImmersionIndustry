@@ -50,7 +50,7 @@ public class IMBlocks implements ContentList {
     dock = new DockBlock("dock") {{
       health = 200*size*size;
       size = 5;
-      requirements(Category.distribution, ItemStack.with(Items.silicon, 45,Items.titanium, 75,Items.lead,120));
+      requirements(Category.distribution, ItemStack.with(Items.copper, 75,Items.lead,120));
       floating = true;
     }};
     
