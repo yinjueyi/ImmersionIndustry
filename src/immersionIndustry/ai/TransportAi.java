@@ -77,16 +77,18 @@ public class TransportAi extends AIController {
   private Tile findNear(Building to) {
     Tile tile = unit.tileOn();
     int value = -1;
-    int ti = 0;
+    Tile ti;
     for(int i = 0;i<4;i++) {
       Tile t = tile.nearby(i);
-      int d = manhattanDistance(tile.x,tile.y,to.tile.x,to.tile.y);
-      if(value == -1 || value > d) {
-        value = d;
-        ti = t;
+      if(t.floor().isLiquid()) {
+        int d = manhattanDistance(tile.x,tile.y,to.tile.x,to.tile.y);
+        if(value == -1 || value > d) {
+          value = d;
+          ti = t;
+        }
       }
     }
-    return ti;
+    return ti == null ? tile : ti;
   }
   
   //计算曼哈顿距离
