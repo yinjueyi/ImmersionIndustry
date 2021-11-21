@@ -82,7 +82,7 @@ public class TransportAi extends AIController {
     for(int i = 0;i<4;i++) {
       Tile t = tile.nearby(i);
       if(t != null && t.floor().isLiquid && t.block() == Blocks.air) {
-        int d = manhattanDistance(t.x,t.y,to.tileX(),to.tileY());
+        int d = Mathf.dst(t.x,t.y,to.tileX(),to.tileY());
         if(value == -1 || value > d) {
           value = d;
           ti = t;
@@ -90,11 +90,6 @@ public class TransportAi extends AIController {
       }
     }
     return ti;
-  }
-  
-  //计算曼哈顿距离
-  private int manhattanDistance(int x,int y,int x2,int y2) {
-    return Math.abs(x2-x) + Math.abs(y2-y);
   }
   
 }
