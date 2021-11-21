@@ -7,6 +7,7 @@ import arc.struct.*;
 import arc.graphics.g2d.*;
 import arc.scene.ui.*;
 import arc.scene.ui.layout.*;
+import arc.scene.style.*;
 import arc.math.Angles;
 import mindustry.type.*;
 import mindustry.graphics.*;
@@ -84,15 +85,11 @@ public class DockDialog extends BaseDialog {
     float width,height;
     
     public UpgradeItem(Color color,TextureRegion icon,String title,String description,Table additional) {
-      super();
+      super(new TextureRegionDrawable(icon));
       width = Core.graphics.isPortrait() ? 120f : 110f;
       height = Core.graphics.isPortrait() ? 330f : 600f;
       
       margin(0);
-      table(background -> {
-        background.setFillParent(true);
-        background.image(icon).size(height,height);
-      });
       table(card -> {
         card.setFillParent(true);
         card.table(head -> {
@@ -102,7 +99,7 @@ public class DockDialog extends BaseDialog {
         }).width(width).top();
         card.row();
         card.add(additional).width(width).bottom();
-      });
+      }).width(width).height(height);
     }
     
   }
