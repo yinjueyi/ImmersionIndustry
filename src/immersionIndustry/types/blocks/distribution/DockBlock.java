@@ -61,7 +61,7 @@ public class DockBlock extends UnitBlock {
   }
   
   public static void showDockData(DockBlockBuild entity) {
-    DockDialog dialog = new DockDialog(DockBlockBuild entity);
+    DockDialog dialog = new DockDialog(entity);
     dialog.show();
   }
   
