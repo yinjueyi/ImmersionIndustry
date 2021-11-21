@@ -1,17 +1,19 @@
 package immersionIndustry.ui;
 
 import arc.*;
+import arc.graphics.*;
 import arc.util.*;
 import arc.graphics.g2d.*;
 import arc.scene.ui.*;
 import arc.scene.ui.layout.*;
 import arc.math.Angles;
+import mindustry.graphics.*;
 import mindustry.gen.*;
 import mindustry.ui.dialogs.*;
 
 import immersionIndustry.IMColors;
 import immersionIndustry.contents.blocks.IMBlocks;
-import immersionIndustry.types.blocks.units.DockBlock.DockBlockBuild;
+import immersionIndustry.types.blocks.distribution.DockBlock.DockBlockBuild;
 
 public class DockDialog extends BaseDialog {
   
@@ -31,7 +33,7 @@ public class DockDialog extends BaseDialog {
     unlocked.row();
     float h = Core.graphics.isPortrait() ? 90f : 80f;
     float w = Core.graphics.isPortrait() ? 330f : 600f;
-    unlocked.add(new UpgradeItem(iMColors.colorPrimary,IMBlocks.dock.region,"升级","将此方块升级")).size(w, h).padTop(5).row();
+    unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"升级","将此方块升级")).size(w, h).padTop(5).row();
     
     Table unlock = new Table();
     unlock.add(Core.bundle.get("dockdialog-unlock"));
@@ -48,25 +50,25 @@ public class DockDialog extends BaseDialog {
       float h = Core.graphics.isPortrait() ? 90f : 80f;
       float w = Core.graphics.isPortrait() ? 330f : 600f;
       
-      table.margin(0);
-      table.table(img -> {
+      margin(0);
+      table(img -> {
         img.image().height(h - 5).width(40f).color(color);
         img.row();
         img.image().height(5).width(40f).color(color.cpy().mul(0.8f, 0.8f, 0.8f, 1f));
       }).expandY();
       
-      table.table(i -> {
+      table(i -> {
         i.background(Tex.buttonEdge3);
         i.image(icon);
       }).size(h - 5, h);
       
-      table.table(inset -> {
+      table(inset -> {
         inset.add("[accent]" + title).growX().left();
         inset.row();
         inset.labelWrap(description).width(w - 100f).color(Color.lightGray).growX();
       }).padLeft(8);
 
-      table.button(Icon.link, () -> {
+      button("解锁", () -> {
         
       }).size(h - 5, h);
     }
