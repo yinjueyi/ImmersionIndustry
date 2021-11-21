@@ -46,6 +46,7 @@ public class DockBlock extends UnitBlock {
   
   public int capacity = 800;
   public TransportShip ship;
+  public int initLevel = 0;
   
   public DockBlock(String name) {
     super(name);
@@ -67,6 +68,7 @@ public class DockBlock extends UnitBlock {
   
   public class DockBlockBuild extends UnitBuild {
     
+    public int level = initLevel;
     public int link = -1;//连接的方块
     public Unit unit;
     
@@ -128,7 +130,9 @@ public class DockBlock extends UnitBlock {
     
     @Override
     public void buildConfiguration(Table table) {
-      
+      table.button("管理",() -> {
+        showDockData(this);
+      })
     };
     
     protected boolean linkValid(){
