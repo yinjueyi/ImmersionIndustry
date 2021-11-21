@@ -3,6 +3,7 @@ package immersionIndustry.ui;
 import arc.*;
 import arc.graphics.*;
 import arc.util.*;
+import arc.struct.*;
 import arc.graphics.g2d.*;
 import arc.scene.ui.*;
 import arc.scene.ui.layout.*;
@@ -41,11 +42,11 @@ public class DockDialog extends BaseDialog {
     unlocked.row();
     float h = Core.graphics.isPortrait() ? 90f : 80f;
     float w = Core.graphics.isPortrait() ? 330f : 600f;
-    unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"升级","将此方块升级"),new Table() {
+    unlocked.add(new UpgradeItem(IMColors.colorPrimary,IMBlocks.dock.region,"升级","将此方块升级",new Table() {
       {
         add(new ItemsDisplay(items[entity.level]));
       }
-    }).size(w, h).padTop(5).row();
+    })).size(w, h).padTop(5).row();
     
     Table unlock = new Table();
     unlock.add(Core.bundle.get("dockdialog-unlock"));
