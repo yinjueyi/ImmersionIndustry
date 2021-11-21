@@ -84,10 +84,10 @@ public class DockDialog extends BaseDialog {
       
       margin(0);
       table(card -> {
-        card.table(title -> {
-          title.add(title).growX().left();
-          title.row();
-          title.labelWrap(description).width(width - 100f).color(Color.lightGray).growX();
+        card.table(head -> {
+          head.add(title).growX().left();
+          head.row();
+          head.labelWrap(description).width(width - 100f).color(Color.lightGray).growX();
         });
         card.row();
         card.table(img -> {
