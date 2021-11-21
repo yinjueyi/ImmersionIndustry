@@ -99,7 +99,8 @@ public class DockDialog extends BaseDialog {
         }).width(width).top();
         card.row();
         card.add(additional).width(width).bottom();
-        card.width(width).height(height);
+        card.setWidth(width);
+        card.setHeight(height);
       });
     }
     
