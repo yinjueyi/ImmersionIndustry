@@ -82,7 +82,7 @@ public class TransportAi extends AIController {
     for(int i = 0;i<4;i++) {
       Tile t = tile.nearby(i);
       if(t != null && t.floor().isLiquid && t.block() == Blocks.air) {
-        int d = manhattanDistance(tile.x,tile.y,to.tileX(),to.tileY());
+        int d = manhattanDistance(t.x,t.y,to.tileX(),to.tileY());
         if(value == -1 || value > d) {
           value = d;
           ti = t;
