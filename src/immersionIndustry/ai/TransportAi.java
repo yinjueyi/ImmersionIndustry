@@ -77,12 +77,12 @@ public class TransportAi extends AIController {
   */
   private Tile findNear(Building to) {
     Tile tile = unit.tileOn();
-    int value = -1;
+    float value = -1;
     Tile ti = tile;
     for(int i = 0;i<4;i++) {
       Tile t = tile.nearby(i);
       if(t != null && t.floor().isLiquid && t.block() == Blocks.air) {
-        int d = Mathf.dst(t.drawx(),t.drawy(),to.x,to.y);
+        float d = Mathf.dst(t.drawx(),t.drawy(),to.x,to.y);
         if(value == -1 || value > d) {
           value = d;
           ti = t;
