@@ -136,7 +136,7 @@ public class LaserTransmitter extends Block {
         for(int i = 1;i<maxLength;i++) {
           Building build = world.build(x + i, y);
           if(build.block.hasItems) {
-            return build
+            return build;
           }
         }
       }
@@ -144,7 +144,7 @@ public class LaserTransmitter extends Block {
         for(int i = 1;i<maxLength;i++) {
           Building build = world.build(x, y+i);
           if(build.block.hasItems) {
-            return build
+            return build;
           }
         }
       }
@@ -152,7 +152,7 @@ public class LaserTransmitter extends Block {
         for(int i = 1;i<maxLength;i++) {
           Building build = world.build(x-i, y);
           if(build.block.hasItems) {
-            return build
+            return build;
           }
         }
       }
@@ -160,7 +160,7 @@ public class LaserTransmitter extends Block {
         for(int i = 1;i<maxLength;i++) {
           Building build = world.build(x, y-i);
           if(build.block.hasItems) {
-            return build
+            return build;
           }
         }
       }
