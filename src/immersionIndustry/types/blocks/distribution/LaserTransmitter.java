@@ -62,6 +62,7 @@ public class LaserTransmitter extends Block {
           Lines.square(tile.drawx(), tile.drawy(), tile.block().size * tilesize / 2f + 1f);
           Draw.reset();
           Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
+          return;
         }
       }
     }
@@ -74,6 +75,7 @@ public class LaserTransmitter extends Block {
           Lines.square(tile.drawx(), tile.drawy(), tile.block().size * tilesize / 2f + 1f);
           Draw.reset();
           Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
+          return;
         }
       }
     }
@@ -86,6 +88,7 @@ public class LaserTransmitter extends Block {
           Lines.square(tile.drawx(), tile.drawy(), tile.block().size * tilesize / 2f + 1f);
           Draw.reset();
           Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
+          return;
         }
       }
     }
@@ -98,6 +101,7 @@ public class LaserTransmitter extends Block {
           Lines.square(tile.drawx(), tile.drawy(), tile.block().size * tilesize / 2f + 1f);
           Draw.reset();
           Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
+          return;
         }
       }
     }
@@ -129,7 +133,9 @@ public class LaserTransmitter extends Block {
     
     public void draw() {
       super.draw();
-      Drawf.laser(team,Core.atlas.find("minelaser"),Core.atlas.find("minelaser-end"),x,y,build.x,build.y);
+      if(build != null) {
+        Drawf.laser(team,Core.atlas.find("minelaser"),Core.atlas.find("minelaser-end"),x,y,build.x,build.y);
+      }
     }
     
     public Building itemTo() {
