@@ -72,6 +72,7 @@ public class DockDialog extends BaseDialog {
       if(data.canShow()) {
         unlocked.add(new UpgradeItem(data,true)).size(w, h).padTop(5).row();
       }else if(data.b.get(entity)){
+        data.color = iMColors.colorYellow;
         unlock.add(new UpgradeItem(data,false)).size(w, h).padTop(5).row();
       }
     }
@@ -101,7 +102,7 @@ public class DockDialog extends BaseDialog {
       }).size(h - 5, h);
       
       table(inset -> {
-        inset.add("[accent]" + title).growX().left();
+        inset.add("[accent]" + data.title).growX().left();
         inset.row();
         inset.labelWrap(data.description).width(w - 100f).color(Color.lightGray).growX();
         inset.row();
