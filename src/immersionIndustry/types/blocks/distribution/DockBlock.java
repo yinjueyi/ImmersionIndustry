@@ -135,6 +135,34 @@ public class DockBlock extends UnitBlock {
       });
     };
     
+    @Override
+    public void write(Writes write) {
+      super.write(write);
+      write.i(level);
+      write.i(link);
+      write.bool(unit != null);
+      if(unit != null) {
+        write.f(unit.x);
+        write.f(unit.y);
+        write.i(unit.stack.item.id);
+        write.i(unit.stack.amount);
+      }
+    };
+    
+    @Override
+    public void read(Reads read, byte revision){
+      super.read(read,revision);
+      level = read.i(level);
+      link = read.i(link);
+      if(read.bool()) {
+        Building other = world.build(this.link);
+        unit = ship.create(team,new TransportAi(this,other));
+        unit.set(read.f(),read.f());
+        unit.stack.set(content.item(read.i()),read.i());
+        unit.add();
+      }
+    }
+    
     protected boolean linkValid(){
       if(link == -1) return false;
       if(!(world.build(this.link) instanceof DockBlockBuild)) return false;
