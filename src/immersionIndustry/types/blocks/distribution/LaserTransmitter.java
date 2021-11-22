@@ -44,6 +44,7 @@ public class LaserTransmitter extends Block {
     configurable = true;
     hasItems = true;
     hasPower = true;
+    rotate = true;
     sync = true;
     envEnabled |= Env.space;
   }
@@ -55,7 +56,7 @@ public class LaserTransmitter extends Block {
     if(rotation == 0) {
       for(int i = 1;i<maxLength;i++) {
         Building build = world.build(x + i, y);
-        if(build.block.hasItems) {
+        if(build.block != null && build.block.hasItems) {
           Draw.color(Pal.accent);
           Lines.stroke(1f);
           Lines.square(build.x, build.y, build.block.size * tilesize / 2f + 1f);
@@ -67,7 +68,7 @@ public class LaserTransmitter extends Block {
     if(rotation == 1) {
       for(int i = 1;i<maxLength;i++) {
         Building build = world.build(x, y+i);
-        if(build.block.hasItems) {
+        if(build.block != null && build.block.hasItems) {
           Draw.color(Pal.accent);
           Lines.stroke(1f);
           Lines.square(build.x, build.y, build.block.size * tilesize / 2f + 1f);
@@ -79,7 +80,7 @@ public class LaserTransmitter extends Block {
     if(rotation == 2) {
       for(int i = 1;i<maxLength;i++) {
         Building build = world.build(x-i, y);
-        if(build.block.hasItems) {
+        if(build.block != null && build.block.hasItems) {
           Draw.color(Pal.accent);
           Lines.stroke(1f);
           Lines.square(build.x, build.y, build.block.size * tilesize / 2f + 1f);
@@ -91,7 +92,7 @@ public class LaserTransmitter extends Block {
     if(rotation == 3) {
       for(int i = 1;i<maxLength;i++) {
         Building build = world.build(x, y-i);
-        if(build.block.hasItems) {
+        if(build.block != null && build.block.hasItems) {
           Draw.color(Pal.accent);
           Lines.stroke(1f);
           Lines.square(build.x, build.y, build.block.size * tilesize / 2f + 1f);
@@ -135,7 +136,7 @@ public class LaserTransmitter extends Block {
       if(rotation == 0) {
         for(int i = 1;i<maxLength;i++) {
           Building build = world.build(tileX() + i, tileY());
-          if(build.block.hasItems) {
+          if(build.block != null && build.block.hasItems) {
             return build;
           }
         }
@@ -143,7 +144,7 @@ public class LaserTransmitter extends Block {
       if(rotation == 1) {
         for(int i = 1;i<maxLength;i++) {
           Building build = world.build(tileX() + i, tileY());
-          if(build.block.hasItems) {
+          if(build.block != null && build.block.hasItems) {
             return build;
           }
         }
@@ -151,7 +152,7 @@ public class LaserTransmitter extends Block {
       if(rotation == 2) {
         for(int i = 1;i<maxLength;i++) {
           Building build = world.build(tileX() + i, tileY());
-          if(build.block.hasItems) {
+          if(build.block != null && build.block.hasItems) {
             return build;
           }
         }
@@ -159,7 +160,7 @@ public class LaserTransmitter extends Block {
       if(rotation == 3) {
         for(int i = 1;i<maxLength;i++) {
           Building build = world.build(tileX() + i, tileY());
-          if(build.block.hasItems) {
+          if(build.block != null && build.block.hasItems) {
             return build;
           }
         }
