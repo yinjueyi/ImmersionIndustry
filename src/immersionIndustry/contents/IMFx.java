@@ -43,16 +43,12 @@ public class IMFx implements ContentList {
   
   public static void takeItemEffect(float x,float y,float x2,float y2,Color color,float lifeTime) {
     new Effect(lifeTime, e -> {
-      Draw.z(Layer.effect);
       Vec2 vec = new Vec2(e.x,e.y);
       vec.lerp(x2, y2, Interp.sineIn.apply(e.fin()));
-      color(color,Color.white,e.fin());
-      Fill.circle(vec.x, vec.y,6f * e.fslope());
-      randLenVectors(e.id, 6, 5 + 15 * e.fin(), (rx, ry) -> {
-		    Fill.square(vec.x + rx, vec.y + ry, 3 * e.fslope());
-		    Fill.square(vec.x - rx, vec.y - ry, 3 * e.fslope());
-			});
-      reset();
+      Draw.color(color);
+      Fill.circle(vec.x, vec.y, 2 * e.fslope());
+      Draw.color(color.cpy().mul(0.8f, 0.8f, 0.8f, 1f));
+      Fill.circle(vec.x, vec.y, 1 * e.fslope());
     }).at(x,y);
   }
   
