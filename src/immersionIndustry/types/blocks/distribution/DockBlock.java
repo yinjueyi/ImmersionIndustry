@@ -146,6 +146,7 @@ public class DockBlock extends UnitBlock {
         write.f(unit.y);
         write.i(unit.stack.item.id);
         write.i(unit.stack.amount);
+        unit.remove();
       }
     };
     
@@ -155,12 +156,19 @@ public class DockBlock extends UnitBlock {
       level = read.i();
       link = read.i();
       if(read.bool()) {
-        Building other = world.build(this.link);
+        Building other = world.build(link);
         unit = ship.create(team,new TransportAi(this,other));
         unit.set(read.f(),read.f());
         unit.stack.set(content.item(read.i()),read.i());
         unit.add();
+        unit.unloaded();
       }
+    }
+    
+    @Override
+    public void afterDestroyed() {
+      super.afterDestroyed();
+      unit.kill();
     }
     
     protected boolean linkValid(){
