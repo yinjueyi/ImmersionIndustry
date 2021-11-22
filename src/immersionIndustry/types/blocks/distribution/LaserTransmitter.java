@@ -55,49 +55,49 @@ public class LaserTransmitter extends Block {
     if(!valid) return;
     if(rotation == 0) {
       for(int i = 1;i<maxLength;i++) {
-        Building build = world.build(x + i, y);
-        if(build.block != null && build.block.hasItems) {
+        Tile tile = world.tile(x+i, y);
+        if(tile.block() != null && tile.block().hasItems) {
           Draw.color(Pal.accent);
           Lines.stroke(1f);
-          Lines.square(build.x, build.y, build.block.size * tilesize / 2f + 1f);
+          Lines.square(tile.drawx(), tile.drawy(), tile.block().size * tilesize / 2f + 1f);
           Draw.reset();
-          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,build.x,build.y);
+          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
         }
       }
     }
     if(rotation == 1) {
       for(int i = 1;i<maxLength;i++) {
-        Building build = world.build(x, y+i);
-        if(build.block != null && build.block.hasItems) {
+        Tile tile = world.tile(x, y+i);
+        if(tile.block() != null && tile.block().hasItems) {
           Draw.color(Pal.accent);
           Lines.stroke(1f);
-          Lines.square(build.x, build.y, build.block.size * tilesize / 2f + 1f);
+          Lines.square(tile.drawx(), tile.drawy(), tile.block().size * tilesize / 2f + 1f);
           Draw.reset();
-          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,build.x,build.y);
+          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
         }
       }
     }
     if(rotation == 2) {
       for(int i = 1;i<maxLength;i++) {
-        Building build = world.build(x-i, y);
-        if(build.block != null && build.block.hasItems) {
+        Tile tile = world.tile(x-i, y);
+        if(tile.block() != null && tile.block().hasItems) {
           Draw.color(Pal.accent);
           Lines.stroke(1f);
-          Lines.square(build.x, build.y, build.block.size * tilesize / 2f + 1f);
+          Lines.square(tile.drawx(), tile.drawy(), tile.block().size * tilesize / 2f + 1f);
           Draw.reset();
-          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,build.x,build.y);
+          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
         }
       }
     }
     if(rotation == 3) {
       for(int i = 1;i<maxLength;i++) {
-        Building build = world.build(x, y-i);
-        if(build.block != null && build.block.hasItems) {
+        Tile tile = world.tile(x, y-i);
+        if(tile.block() != null && tile.block().hasItems) {
           Draw.color(Pal.accent);
           Lines.stroke(1f);
-          Lines.square(build.x, build.y, build.block.size * tilesize / 2f + 1f);
+          Lines.square(tile.drawx(), tile.drawy(), tile.block().size * tilesize / 2f + 1f);
           Draw.reset();
-          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,build.x,build.y);
+          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
         }
       }
     }
@@ -135,33 +135,33 @@ public class LaserTransmitter extends Block {
     public Building itemTo() {
       if(rotation == 0) {
         for(int i = 1;i<maxLength;i++) {
-          Building build = world.build(tileX() + i, tileY());
-          if(build.block != null && build.block.hasItems) {
-            return build;
+          Tile tile = world.tile(tileX()+i, tileY());
+          if(tile.block() != null && tile.block().hasItems) {
+            return tile.build;
           }
         }
       }
       if(rotation == 1) {
         for(int i = 1;i<maxLength;i++) {
-          Building build = world.build(tileX() + i, tileY());
-          if(build.block != null && build.block.hasItems) {
-            return build;
+          Tile tile = world.tile(tileX(), tileY()+i);
+          if(tile.block() != null && tile.block().hasItems) {
+            return tile.build;
           }
         }
       }
       if(rotation == 2) {
         for(int i = 1;i<maxLength;i++) {
-          Building build = world.build(tileX() + i, tileY());
-          if(build.block != null && build.block.hasItems) {
-            return build;
+          Tile tile = world.tile(tileX()-i, tileY());
+          if(tile.block() != null && tile.block().hasItems) {
+            return tile.build;
           }
         }
       }
       if(rotation == 3) {
         for(int i = 1;i<maxLength;i++) {
-          Building build = world.build(tileX() + i, tileY());
-          if(build.block != null && build.block.hasItems) {
-            return build;
+          Tile tile = world.tile(tileX(), tileY()-i);
+          if(tile.block() != null && tile.block().hasItems) {
+            return tile.build;
           }
         }
       }
