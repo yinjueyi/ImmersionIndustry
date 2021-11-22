@@ -111,7 +111,7 @@ public class LaserTransmitter extends Block {
       if(build == null || !build.isValid()) {
         Building build = itemTo();
       }
-      if(timer(timerDump,interval)) {
+      if(build != null && timer(timerDump,interval)) {
         Item item = items.first();
         if(item != null) {
           if(build.acceptItem(this,item)) {
@@ -134,7 +134,7 @@ public class LaserTransmitter extends Block {
     public Building itemTo() {
       if(rotation == 0) {
         for(int i = 1;i<maxLength;i++) {
-          Building build = world.build(x + i, y);
+          Building build = world.build(tileX() + i, tileY());
           if(build.block.hasItems) {
             return build;
           }
@@ -142,7 +142,7 @@ public class LaserTransmitter extends Block {
       }
       if(rotation == 1) {
         for(int i = 1;i<maxLength;i++) {
-          Building build = world.build(x, y+i);
+          Building build = world.build(tileX() + i, tileY());
           if(build.block.hasItems) {
             return build;
           }
@@ -150,7 +150,7 @@ public class LaserTransmitter extends Block {
       }
       if(rotation == 2) {
         for(int i = 1;i<maxLength;i++) {
-          Building build = world.build(x-i, y);
+          Building build = world.build(tileX() + i, tileY());
           if(build.block.hasItems) {
             return build;
           }
@@ -158,7 +158,7 @@ public class LaserTransmitter extends Block {
       }
       if(rotation == 3) {
         for(int i = 1;i<maxLength;i++) {
-          Building build = world.build(x, y-i);
+          Building build = world.build(tileX() + i, tileY());
           if(build.block.hasItems) {
             return build;
           }
