@@ -57,10 +57,7 @@ public class LaserTransmitter extends Block {
       for(int i = 1;i<maxLength;i++) {
         Tile tile = world.tile(x+i, y);
         if(tile.block() != null && tile.block().hasItems) {
-          Draw.color(Pal.accent);
-          Lines.stroke(1f);
-          Lines.square(tile.drawx(), tile.drawy(), tile.block().size * tilesize / 2f + 1f);
-          Draw.reset();
+          tile.build.drawConfigure();
           Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
           return;
         }
@@ -70,10 +67,7 @@ public class LaserTransmitter extends Block {
       for(int i = 1;i<maxLength;i++) {
         Tile tile = world.tile(x, y+i);
         if(tile.block() != null && tile.block().hasItems) {
-          Draw.color(Pal.accent);
-          Lines.stroke(1f);
-          Lines.square(tile.drawx(), tile.drawy(), tile.block().size * tilesize / 2f + 1f);
-          Draw.reset();
+          tile.build.drawConfigure();
           Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
           return;
         }
@@ -83,10 +77,7 @@ public class LaserTransmitter extends Block {
       for(int i = 1;i<maxLength;i++) {
         Tile tile = world.tile(x-i, y);
         if(tile.block() != null && tile.block().hasItems) {
-          Draw.color(Pal.accent);
-          Lines.stroke(1f);
-          Lines.square(tile.drawx(), tile.drawy(), tile.block().size * tilesize / 2f + 1f);
-          Draw.reset();
+          tile.build.drawConfigure();
           Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
           return;
         }
@@ -96,10 +87,7 @@ public class LaserTransmitter extends Block {
       for(int i = 1;i<maxLength;i++) {
         Tile tile = world.tile(x, y-i);
         if(tile.block() != null && tile.block().hasItems) {
-          Draw.color(Pal.accent);
-          Lines.stroke(1f);
-          Lines.square(tile.drawx(), tile.drawy(), tile.block().size * tilesize / 2f + 1f);
-          Draw.reset();
+          tile.build.drawConfigure();
           Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
           return;
         }
@@ -114,7 +102,7 @@ public class LaserTransmitter extends Block {
     @Override
     public void updateTile() {
       if(build == null || !build.isValid()) {
-        Building build = itemTo();
+        build = itemTo();
       }
       if(build != null && timer(timerDump,interval)) {
         Item item = items.first();
@@ -131,11 +119,17 @@ public class LaserTransmitter extends Block {
       }
     }
     
+    @Override
     public void draw() {
       super.draw();
       if(build != null) {
         Drawf.laser(team,Core.atlas.find("minelaser"),Core.atlas.find("minelaser-end"),x,y,build.x,build.y);
       }
+    }
+    
+    @Override
+    public boolean acceptItem(Building source, Item item){
+        return items.get(item) < getMaximumAccepted(item);
     }
     
     public Building itemTo() {
