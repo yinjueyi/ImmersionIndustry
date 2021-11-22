@@ -152,8 +152,8 @@ public class DockBlock extends UnitBlock {
     @Override
     public void read(Reads read, byte revision){
       super.read(read,revision);
-      level = read.i(level);
-      link = read.i(link);
+      level = read.i();
+      link = read.i();
       if(read.bool()) {
         Building other = world.build(this.link);
         unit = ship.create(team,new TransportAi(this,other));
