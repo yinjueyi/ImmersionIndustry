@@ -34,7 +34,7 @@ import immersionIndustry.contents.IMFx;
 public class LaserTransmitter extends Block {
   
   int maxLength = 30;
-  float speed = 1;//1帧多少瓷砖
+  float speed = 2;//倍数
   float interval = 10;
   
   public LaserTransmitter(String name) {
@@ -97,19 +97,19 @@ public class LaserTransmitter extends Block {
   
   public class TransmitterBuild extends Building {
     
-    Building build;
+    Tile target;
     
     @Override
     public void updateTile() {
-      if(build == null || !build.isValid()) {
-        build = itemTo();
+      if(target == null || !target.build.isValid()) {
+        target = itemTo();
       }
-      if(build != null && timer(timerDump,interval)) {
+      if(target != null && timer(timerDump,interval)) {
         Item item = items.first();
         if(item != null) {
-          if(build.acceptItem(this,item)) {
-            float time = Mathf.dstm(x,y,build.x,build.y) / tilesize * speed;
-            IMFx.takeItemEffect(x,y,build.x,build.y,item.color,time);
+          if(target.build.acceptItem(this,item)) {
+            float time = Mathf.dstm(x,y,target.drawx(),target.drawy()) / tilesize * speed;
+            IMFx.takeItemEffect(x,y,target.drawx(),target.drawy(),item.color,time);
             Time.run(time,() -> {
               build.handleItem(this,item);
               items.remove(item,1);
@@ -122,8 +122,8 @@ public class LaserTransmitter extends Block {
     @Override
     public void draw() {
       super.draw();
-      if(build != null) {
-        Drawf.laser(team,Core.atlas.find("minelaser"),Core.atlas.find("minelaser-end"),x,y,x,build.y);
+      if(target != null) {
+        Drawf.laser(team,Core.atlas.find("minelaser"),Core.atlas.find("minelaser-end"),x,y,x,target.drawy());
       }
     }
     
@@ -132,12 +132,12 @@ public class LaserTransmitter extends Block {
         return items.get(item) < getMaximumAccepted(item);
     }
     
-    public Building itemTo() {
+    public Tile itemTo() {
       if(rotation == 0) {
         for(int i = 1;i<maxLength;i++) {
           Tile tile = world.tile(tileX()+i, tileY());
           if(tile.block() != null && tile.block().hasItems) {
-            return tile.build;
+            return tile;
           }
         }
       }
@@ -145,7 +145,7 @@ public class LaserTransmitter extends Block {
         for(int i = 1;i<maxLength;i++) {
           Tile tile = world.tile(tileX(), tileY()+i);
           if(tile.block() != null && tile.block().hasItems) {
-            return tile.build;
+            return tile;
           }
         }
       }
@@ -153,7 +153,7 @@ public class LaserTransmitter extends Block {
         for(int i = 1;i<maxLength;i++) {
           Tile tile = world.tile(tileX()-i, tileY());
           if(tile.block() != null && tile.block().hasItems) {
-            return tile.build;
+            return tile;
           }
         }
       }
@@ -161,7 +161,7 @@ public class LaserTransmitter extends Block {
         for(int i = 1;i<maxLength;i++) {
           Tile tile = world.tile(tileX(), tileY()-i);
           if(tile.block() != null && tile.block().hasItems) {
-            return tile.build;
+            return tile;
           }
         }
       }
