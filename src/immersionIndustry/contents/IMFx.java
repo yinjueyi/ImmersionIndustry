@@ -47,7 +47,7 @@ public class IMFx implements ContentList {
       vec.lerp(x2, y2, Interp.sineIn.apply(e.fin()));
       Draw.color(color);
       Fill.circle(vec.x, vec.y, 2 * e.fslope());
-      Draw.color(color.cpy().mul(0.8f, 0.8f, 0.8f, 1f));
+      Draw.color();
       Fill.circle(vec.x, vec.y, 1 * e.fslope());
     }).at(x,y);
   }
