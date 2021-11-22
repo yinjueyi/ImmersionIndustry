@@ -41,11 +41,18 @@ import immersionIndustry.types.blocks.distribution.*;
 //实现ContentList
 public class IMBlocks implements ContentList {
   
-  public static Block t1ChipFactory,collapseExtractor,collapseQuantumCultivation;
+  public static Block t1ChipFactory,collapseExtractor,collapseQuantumCultivation,auroraGuide;
   
   //在这里创建变量
   @Override
   public void load() {
+    
+    auroraGuide = new LaserTransmitter("aurora-guide"){{
+      health = 200*size*size;
+      size = 1;
+      requirements(Category.distribution, ItemStack.with(Items.silicon, 45,Items.titanium, 75,Items.lead,120));
+      consumes.power(2);
+    }};
     
     t1ChipFactory = new GenericCrafter("T1-chip-factory"){{
       health = 200*size*size;
