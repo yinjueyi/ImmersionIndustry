@@ -41,18 +41,11 @@ import immersionIndustry.types.blocks.distribution.*;
 //实现ContentList
 public class IMBlocks implements ContentList {
   
-  public static Block t1ChipFactory,collapseExtractor,collapseQuantumCultivation,dock;
+  public static Block t1ChipFactory,collapseExtractor,collapseQuantumCultivation;
   
   //在这里创建变量
   @Override
   public void load() {
-    
-    dock = new DockBlock("dock") {{
-      health = 200*size*size;
-      size = 5;
-      requirements(Category.distribution, ItemStack.with(Items.copper, 75,Items.lead,120));
-      floating = true;
-    }};
     
     t1ChipFactory = new GenericCrafter("T1-chip-factory"){{
       health = 200*size*size;
