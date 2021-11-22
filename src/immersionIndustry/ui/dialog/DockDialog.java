@@ -72,7 +72,7 @@ public class DockDialog extends BaseDialog {
       if(data.canShow()) {
         unlocked.add(new UpgradeItem(data,true)).size(w, h).padTop(5).row();
       }else if(data.b.get(entity)){
-        data.color = iMColors.colorYellow;
+        data.color = IMColors.colorYellow;
         unlock.add(new UpgradeItem(data,false)).size(w, h).padTop(5).row();
       }
     }
