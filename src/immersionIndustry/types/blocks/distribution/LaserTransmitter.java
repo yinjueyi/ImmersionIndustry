@@ -111,7 +111,7 @@ public class LaserTransmitter extends Block {
             float time = Mathf.dstm(x,y,target.drawx(),target.drawy()) / tilesize * speed;
             IMFx.takeItemEffect(x,y,target.drawx(),target.drawy(),item.color,time);
             Time.run(time,() -> {
-              build.handleItem(this,item);
+              target.build.handleItem(this,item);
               items.remove(item,1);
             });
           }
