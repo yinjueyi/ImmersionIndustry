@@ -123,7 +123,7 @@ public class LaserTransmitter extends Block {
     public void draw() {
       super.draw();
       if(build != null) {
-        Drawf.laser(team,Core.atlas.find("minelaser"),Core.atlas.find("minelaser-end"),x,y,build.x,build.y);
+        Drawf.laser(team,Core.atlas.find("minelaser"),Core.atlas.find("minelaser-end"),x,y,x,build.y);
       }
     }
     
