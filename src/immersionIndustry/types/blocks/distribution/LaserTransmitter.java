@@ -37,16 +37,16 @@ public class LaserTransmitter extends Block {
   float speed = 2;//倍数
   float interval = 10;
   public Effect craftEffect = new Effect(38f,e -> {
-    color(IMColors.colorYellow,iMColors.colorWhite,e.fin());
+    color(IMColors.colorYellow,IMColors.colorWhite,e.fin());
     randLenVectors(e.id, 2, 1f + 20f * e.fout(), e.rotation, 120f, (x, y) -> {
       lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 2f + 1f);
     });
     
     alpha(e.fin());
     color(IMColors.colorWhite);
-    File.circle(e.x,e.y,3);
+    Fill.circle(e.x,e.y,3);
     color(IMColors.colorYellow);
-    File.circle(e.x,e.y,7.5f);
+    Fill.circle(e.x,e.y,7.5f);
     Drawf.light(e.x,e.y,32,IMColors.colorYellow,e.fin());
   });
   
