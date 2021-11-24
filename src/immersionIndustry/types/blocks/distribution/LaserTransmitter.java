@@ -42,11 +42,11 @@ public class LaserTransmitter extends Block {
       lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 2f + 1f);
     });
     
-    alpha(e.fin());
+    alpha(e.fin()*0.5f);
     color(IMColors.colorWhite);
-    Fill.circle(e.x,e.y,3);
+    Fill.circle(e.x,e.y,0.5f);
     color(IMColors.colorYellow);
-    Fill.circle(e.x,e.y,7.5f);
+    Fill.circle(e.x,e.y,1.5f);
     Drawf.light(e.x,e.y,32,IMColors.colorYellow,e.fin());
   });
   
@@ -114,7 +114,7 @@ public class LaserTransmitter extends Block {
     
     @Override
     public void updateTile() {
-      if(target == null || !target.build.isValid()) {
+      if(target == null || target.build == null || !target.build.isValid()) {
         target = itemTo();
       }
       if(target != null && timer(timerDump,interval)) {
@@ -138,9 +138,9 @@ public class LaserTransmitter extends Block {
       super.draw();
       if(target != null) {
         if(rotation == 1 || rotation == 3) {
-          Drawf.laser(team,Core.atlas.find("minelaser"),Core.atlas.find("minelaser-end"),x,y,x,target.drawy());
+          Drawf.laser(team,Core.atlas.find("minelaser"),Core.atlas.find("minelaser-end"),x,y,x,target.drawy(),0.4f);
         }else {
-          Drawf.laser(team,Core.atlas.find("minelaser"),Core.atlas.find("minelaser-end"),x,y,target.drawy(),y);
+          Drawf.laser(team,Core.atlas.find("minelaser"),Core.atlas.find("minelaser-end"),x,y,target.drawx(),y,0.4f);
         }
       }
     }
