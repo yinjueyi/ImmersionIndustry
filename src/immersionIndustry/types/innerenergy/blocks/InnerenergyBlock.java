@@ -82,6 +82,7 @@ public class InnerenergyBlock extends Block {
         return entity.progress;
       }
     }
+    return 0;
   }
   
   public void addOtherInnerenergy(Building build,float add) {
