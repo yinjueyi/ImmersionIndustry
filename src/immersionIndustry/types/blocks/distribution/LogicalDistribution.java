@@ -35,8 +35,6 @@ import immersionIndustry.contents.IMFx;
 
 public class LogicalDistribution extends Block {
   
-  View view;
-  
   public LogicalDistribution(String name) {
     super(name);
     update = true;
@@ -50,7 +48,6 @@ public class LogicalDistribution extends Block {
   @Override
   public void init() {
     super.init();
-    view = new View();
   }
   
   public String getContName() {
@@ -69,9 +66,32 @@ public class LogicalDistribution extends Block {
           color.row();
           color.image().height(16).width(16).color(IMColors.colorYellow);
         }).pad(6).left();
+        cont.row();
         cont.table(d -> {
-          d.table(new TextureRegionDrawable(fullIcon)).size(size * tilesize*2);
-        }).pad(6).left();
+          d.table(top -> {
+            for(int i = 0; i<size;i++) {
+              top.add(new View(IMColors.colorPrimary,false)).size(size * tilesize*2);
+            }
+          });
+          d.row();
+          d.table(left -> {
+            for(int i = 0; i<size;i++) {
+              left.add(new View(IMColors.colorPrimary,false)).size(size * tilesize*2);
+            }
+          });
+          d.table(new TextureRegionDrawable(uiIcon)).size(size * tilesize*2);
+          d.table(right -> {
+            for(int i = 0; i<size;i++) {
+              right.add(new View(IMColors.colorPrimary,false)).size(size * tilesize*2);
+            }
+          });
+          d.row();
+          d.table(bottom -> {
+            for(int i = 0; i<size;i++) {
+              bottom.add(new View(IMColors.colorPrimary,false)).size(size * tilesize*2);
+            }
+          });
+        }).pad(6).center();
       }).pad(6);
     }
     
@@ -82,10 +102,24 @@ public class LogicalDistribution extends Block {
     
   }
   
-  public class View extends Table {
+  public class View extends BorderImage {
     
-    public View() {
+    boolean export;
+    
+    public View(Color color,boolean export) {
       super();
+      borderColor = color;
+      this.export = export;
+    }
+    
+    @Override
+    public void draw(){
+      super.draw();
+      if(export) {
+        Fill.square(x,y,width/2);
+      }else {
+        Fill.circle(x,y,width/2);
+      }
     }
     
   }
