@@ -43,7 +43,7 @@ public class LogicalDistribution extends Block {
   }
   
   public String getContName() {
-    return block.name;
+    return name;
   }
   
   public class LogicalBuilding extends Building {
@@ -51,19 +51,17 @@ public class LogicalDistribution extends Block {
     @Override
     public void buildConfiguration(Table table) {
       table.table(Styles.black,cont -> {
-        cont.pad(6);
         cont.add(getContName());
         cont.row();
         cont.table(color -> {
-          color.pad(6);
           color.image().height(8).width(8).color(IMColors.colorPrimary);
           color.row();
           color.image().height(8).width(8).color(IMColors.colorYellow);
-        });
+        }).pad(6);
         cont.table(d -> {
           
-        });
-      });
+        }).pad(6);
+      }).pad(6);
     }
     
     @Override
