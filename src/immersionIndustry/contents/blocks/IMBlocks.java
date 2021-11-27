@@ -41,13 +41,13 @@ import immersionIndustry.types.blocks.distribution.*;
 //实现ContentList
 public class IMBlocks implements ContentList {
   
-  public static Block t1ChipFactory,collapseExtractor,collapseQuantumCultivation,auroraGuide,logicalDistribution;
+  public static Block t1ChipFactory,collapseExtractor,collapseQuantumCultivation,auroraGuide,innerenergyBlock;
   
   //在这里创建变量
   @Override
   public void load() {
     
-    logicalDistribution = new LogicalDistribution("logical-distribution"){{
+    innerenergyBlock = new InnerenergyBlock("innerenergy-block"){{
       health = 200*size*size;
       size = 1;
       requirements(Category.distribution, ItemStack.with(Items.silicon, 45,Items.titanium, 75,Items.lead,120));
