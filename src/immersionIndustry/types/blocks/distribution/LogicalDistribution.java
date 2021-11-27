@@ -23,7 +23,6 @@ import mindustry.ui.*;
 import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
 import mindustry.world.meta.*;
-import mindustry.content.*;
 
 import static mindustry.Vars.*;
 import static arc.graphics.g2d.Draw.rect;
@@ -70,10 +69,10 @@ public class LogicalDistribution extends Block {
         cont.row();
         cont.table(color -> {
           color.image().height(16).width(16).color(IMColors.colorPrimary);
-          color.add(new ItemDisplay(Item.copper,Item.lead));
+          color.add(new ItemDisplay(Items.copper,Items.lead));
           color.row();
           color.image().height(16).width(16).color(IMColors.colorYellow);
-          color.add(new ItemDisplay(Item.titanium,Item.silicon));
+          color.add(new ItemDisplay(Items.titanium,Items.silicon));
         }).pad(6).left();
         cont.row();
         cont.table(d -> {
