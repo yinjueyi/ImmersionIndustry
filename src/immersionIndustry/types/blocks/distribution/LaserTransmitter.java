@@ -117,11 +117,11 @@ public class LaserTransmitter extends Block {
       if(target == null || target.build == null || !target.build.isValid()) {
         target = itemTo();
       }
-      if(target != null && timer(timerDump,interval)) {
+      if(target != null && efficiency() > 0 && timer(timerDump,interval)) {
         Item item = items.first();
         if(item != null) {
           if(target.build.acceptItem(this,item)) {
-            float time = Mathf.dstm(x,y,target.drawx(),target.drawy()) / tilesize * speed;
+            float time = Mathf.dstm(x,y,target.drawx(),target.drawy()) / tilesize * speed / efficiency();
             IMFx.takeItemEffect(x,y,target.drawx(),target.drawy(),item.color,time);
             Time.run(time,() -> {
               target.build.handleItem(this,item);

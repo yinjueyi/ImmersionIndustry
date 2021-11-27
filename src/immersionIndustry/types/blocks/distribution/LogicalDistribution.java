@@ -1,0 +1,77 @@
+package immersionIndustry.types.blocks.distribution;
+
+import arc.*;
+import arc.graphics.*;
+import arc.graphics.g2d.*;
+import arc.math.*;
+import arc.math.geom.Vec2;
+import arc.struct.*;
+import arc.util.*;
+import arc.util.io.*;
+import arc.scene.ui.layout.Table;
+import mindustry.content.*;
+import mindustry.entities.*;
+import mindustry.entities.units.*;
+import mindustry.game.*;
+import mindustry.gen.*;
+import mindustry.graphics.*;
+import mindustry.logic.*;
+import mindustry.type.*;
+import mindustry.ui.*;
+import mindustry.world.*;
+import mindustry.world.blocks.environment.*;
+import mindustry.world.meta.*;
+
+import static mindustry.Vars.*;
+import static arc.graphics.g2d.Draw.rect;
+import static arc.graphics.g2d.Draw.*;
+import static arc.graphics.g2d.Lines.*;
+import static arc.math.Angles.*;
+
+import immersionIndustry.IMColors;
+import immersionIndustry.contents.IMFx;
+
+public class LogicalDistribution extends Block {
+  public LogicalDistribution(String name) {
+    super(name);
+    update = true;
+    solid = true;
+    configurable = true;
+    hasItems = true;
+    hasPower = true;
+    sync = true;
+  }
+  
+  public String getContName() {
+    return block.name;
+  }
+  
+  public class LogicalBuilding extends Building {
+    
+    @Override
+    public void buildConfiguration(Table table) {
+      table.table(Styles.black,cont -> {
+        cont.pad(6);
+        cont.add(getContName());
+        cont.row();
+        cont.table(color -> {
+          color.pad(6);
+          color.image().height(8).width(8).color(IMColors.colorPrimary);
+          color.row();
+          color.image().height(8).width(8).color(IMColors.colorYellow);
+        });
+        cont.table(d -> {
+          
+        });
+      });
+    }
+    
+    @Override
+    public boolean acceptItem(Building source, Item item) {
+      nearby(1,1).drawConfigure();
+      return false;
+    }
+    
+  }
+  
+}
