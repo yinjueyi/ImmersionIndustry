@@ -37,6 +37,7 @@ import immersionIndustry.contents.IMFx;
 import immersionIndustry.contents.drawer.*;
 import immersionIndustry.types.blocks.production.*;
 import immersionIndustry.types.blocks.distribution.*;
+import immersionIndustry.types.innerenergy.blocks.*;
 
 //实现ContentList
 public class IMBlocks implements ContentList {
