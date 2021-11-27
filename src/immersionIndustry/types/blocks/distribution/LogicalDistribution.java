@@ -2,6 +2,7 @@ package immersionIndustry.types.blocks.distribution;
 
 import arc.*;
 import arc.scene.*;
+import arc.scene.style.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
 import arc.math.*;
@@ -81,22 +82,18 @@ public class LogicalDistribution extends Block {
     
   }
   
-  public class View extends Group {
+  public class View extends Table {
     
     public View() {
+      center();
       setSize((size+1) * tilesize);
+      table.table(new TextureRegionDrawable(fullIcon)).size(size * tilesize);
       Draw.color(Pal.accent);
       for(int i = 0;i<size;i++) {
         Lines.stroke(1f);
         Lines.square(x, y + i * tilesize, tilesize / 2f + 1f);
       }
       Draw.reset();
-    }
-    
-    @Override
-    public void draw() {
-      super.draw();
-      Draw.rect(fullIcon, x + size * tilesize/2f, y + size * tilesize/2f, size * tilesize, size * tilesize);
     }
     
   }
