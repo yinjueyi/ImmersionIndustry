@@ -54,7 +54,7 @@ public class InnerenergyBlock extends Block {
 				() -> Core.bundle.get("stat.innerenergy"),
 				() -> Color.orange,
 				() -> entity.inner / 1)
-		).blink(Color.white));
+		).blink(Color.white);
   }
   
   @Override
