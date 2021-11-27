@@ -39,7 +39,7 @@ import static mindustry.Vars.*;
 import immersionIndustry.IMColors;
 
 public class IMFx implements ContentList {
-  public static Effect dispersion,shockWave,absorbedEnergy,crystallizationEnergy;
+  public static Effect dispersion,shockWave,absorbedEnergy,crystallizationEnergy,absorptionHeat,lossHeat;
   
   public static void takeItemEffect(float x,float y,float x2,float y2,Color color,float lifeTime) {
     new Effect(lifeTime, e -> {
@@ -54,6 +54,25 @@ public class IMFx implements ContentList {
   
   @Override
   public void load() {
+    
+    absorptionHeat = new Effect(60f,e -> {
+      color(Color.orange,Color.white,e.fin());
+      randLenVectors(e.id, 2, 1f + 20f * e.fout(), e.rotation, 80f, (x, y) -> {
+        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 2f + 1f);
+      });
+      Draw.alpha(e.fin());
+      Fill.square(e.x,e.y,8);
+    });
+    
+    lossHeat = new Effect(60f,e -> {
+      color(Color.orange,Color.white,e.fin());
+      randLenVectors(e.id, 2, 1f + 20f * e.fout(), e.rotation, 80f, (x, y) -> {
+        lineAngle(e.x - x, e.y - y, Mathf.angle(x, y), e.fslope() * 2f + 1f);
+      });
+      Draw.alpha(e.fin());
+      Fill.square(e.x,e.y,8);
+    });
+    
     dispersion = new Effect(60f,e -> {
       color(IMColors.colorPrimary,IMColors.colorDarkPrimary,e.fout());
       randLenVectors(e.id, 4, 1f + 20f * e.fout(), e.rotation, 64, (x, y) -> {
