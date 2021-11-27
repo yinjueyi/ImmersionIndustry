@@ -23,6 +23,7 @@ import mindustry.ui.*;
 import mindustry.world.*;
 import mindustry.world.blocks.environment.*;
 import mindustry.world.meta.*;
+import mindustry.content.*;
 
 import static mindustry.Vars.*;
 import static arc.graphics.g2d.Draw.rect;
@@ -95,7 +96,7 @@ public class LogicalDistribution extends Block {
               right.row();
             }
             right.table(ext -> {
-              center();
+              ext.center();
               ext.add("远程传输");
               ext.add(new View(IMColors.colorPrimary,false)).size(width);
             }).marginLeft(width*2);
@@ -124,7 +125,7 @@ public class LogicalDistribution extends Block {
     public View(Color color,boolean export) {
       super();
       borderColor = color;
-      color = export ? IMColors.colorPrimary : colorYellow;
+      color = export ? IMColors.colorPrimary : IMColors.colorYellow;
       this.export = export;
     }
     
