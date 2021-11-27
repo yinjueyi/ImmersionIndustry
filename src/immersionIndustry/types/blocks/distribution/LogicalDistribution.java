@@ -87,7 +87,7 @@ public class LogicalDistribution extends Block {
     public View() {
       center();
       setSize((size+1) * tilesize);
-      table.table(new TextureRegionDrawable(fullIcon)).size(size * tilesize);
+      table(new TextureRegionDrawable(fullIcon)).size(size * tilesize);
       Draw.color(Pal.accent);
       for(int i = 0;i<size;i++) {
         Lines.stroke(1f);
