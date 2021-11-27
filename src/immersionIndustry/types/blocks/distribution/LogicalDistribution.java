@@ -69,10 +69,12 @@ public class LogicalDistribution extends Block {
         cont.row();
         cont.table(color -> {
           color.image().height(16).width(16).color(IMColors.colorPrimary);
-          color.add(new ItemDisplay(Items.copper,Items.lead));
+          color.add(new ItemDisplay(Items.copper));
+          color.add(new ItemDisplay(Items.lead));
           color.row();
           color.image().height(16).width(16).color(IMColors.colorYellow);
-          color.add(new ItemDisplay(Items.titanium,Items.silicon));
+          color.add(new ItemDisplay(Items.titanium));
+          color.add(new ItemDisplay(Items.silicon));
         }).pad(6).left();
         cont.row();
         cont.table(d -> {
