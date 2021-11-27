@@ -62,6 +62,7 @@ public class LogicalDistribution extends Block {
     @Override
     public void buildConfiguration(Table table) {
       table.table(Styles.black,cont -> {
+        left();
         cont.add(getContName()+":");
         cont.row();
         cont.table(color -> {
@@ -70,7 +71,7 @@ public class LogicalDistribution extends Block {
           color.image().height(16).width(16).color(IMColors.colorYellow);
         }).pad(6);
         cont.table(d -> {
-          d.add(view);
+          d.table(new TextureRegionDrawable(fullIcon)).size(size * tilesize);
         }).pad(6);
       }).pad(6);
     }
@@ -86,8 +87,6 @@ public class LogicalDistribution extends Block {
     
     public View() {
       super();
-      center();
-      table(new TextureRegionDrawable(fullIcon)).size(size * tilesize);
     }
     
   }
