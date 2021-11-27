@@ -94,7 +94,7 @@ public class LogicalDistribution extends Block {
               right.add(new View(IMColors.colorPrimary,false)).size(width);
               right.row();
             }
-            right.table(ext - > {
+            right.table(ext -> {
               center();
               ext.add("远程传输");
               ext.add(new View(IMColors.colorPrimary,false)).size(width);
