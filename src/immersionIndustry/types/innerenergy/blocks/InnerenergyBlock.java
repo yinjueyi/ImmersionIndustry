@@ -24,6 +24,8 @@ import mindustry.world.*;
 import mindustry.world.blocks.power.*;
 import mindustry.world.blocks.environment.*;
 import mindustry.world.meta.*;
+import mindustry.world.blocks.power.NuclearReactor.*;
+import mindustry.world.blocks.production.GenericCrafter.*;
 
 import static mindustry.Vars.*;
 import static arc.graphics.g2d.Draw.rect;
@@ -125,14 +127,14 @@ public class InnerenergyBlock extends Block {
       for(int i = 0;i<4;i++) {
         Building build = nearby(i);
         if(build != null && build.isValid()) {
-          float i = efficiency(build);
-          if(i > 0) {
+          float in = efficiency(build);
+          if(in > 0) {
             IMFx.absorptionHeat.at(this);
-          }else if(i < 0) {
+          }else if(in < 0) {
             IMFx.lossHeat.at(this);
           }
-          inner += i;
-          addOtherInnerenergy(-i);
+          inner += in;
+          addOtherInnerenergy(build,-in);
         }
       }
     }
