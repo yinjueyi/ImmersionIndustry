@@ -91,10 +91,7 @@ public class InnerenergyBlock extends Block {
   }
   
   public void drawOtherConfigure(Building build) {
-    Draw.color(Pal.accent);
-    Lines.stroke(1f);
-    Lines.square(build.x, build.y, build.block.size * tilesize / 2f + 1f);
-    Draw.reset();
+    Drawf.select(build.x, build.y,build.block.size * tilesize / 2f + 2f + Mathf.absin(Time.time, 4f, 1f),Pal.place);
   }
   
   public class InnerenergyBuilding extends Building {
@@ -149,7 +146,7 @@ public class InnerenergyBlock extends Block {
           if(getBuildingInnerenergy(build) < inner) {
             drawOtherConfigure(build);
           }else {
-            Drawf.select(build.x, build.y,build.block.size * tilesize / 2f + 2f + Mathf.absin(Time.time, 4f, 1f),Pal.breakInvalid);
+            Drawf.select(build.x, build.y,build.block.size * tilesize,Pal.breakInvalid);
           }
         }
       }
