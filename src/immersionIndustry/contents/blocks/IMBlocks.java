@@ -42,11 +42,17 @@ import immersionIndustry.types.innerenergy.blocks.*;
 //实现ContentList
 public class IMBlocks implements ContentList {
   
-  public static Block t1ChipFactory,collapseExtractor,collapseQuantumCultivation,auroraGuide,innerenergyBlock;
+  public static Block t1ChipFactory,collapseExtractor,collapseQuantumCultivation,auroraGuide,innerenergyBlock,nearNerenergyConductor;
   
   //在这里创建变量
   @Override
   public void load() {
+    
+    nearNerenergyConductor = new NearNerenergyConductor("near-nerenergy-nonductor") {
+      health = 200*size*size;
+      size = 1;
+      requirements(Category.distribution, ItemStack.with(Items.silicon, 45,Items.titanium, 75,Items.lead,120));
+    }
     
     innerenergyBlock = new InnerenergyBlock("innerenergy-block"){{
       health = 200*size*size;
