@@ -51,7 +51,7 @@ public class NearNerenergyConductor extends InnerenergyBlock {
     super.drawPlace(x,y,rotation,valid);
     for(int i = 0;i<4;i++) {
       //如果是前方的方块，跳过
-      if(i == rotation) return;
+      if(i == rotation) break;
       Building build = world.tiles.get(x,y).nearbyBuild(i);
       if(build != null && build.isValid()) {
         if(getBuildingInnerenergy(build) > 0) {
@@ -106,7 +106,7 @@ public class NearNerenergyConductor extends InnerenergyBlock {
       //获取除前方以外的所有Building，提取内能
       for(int i = 0;i<4;i++) {
         if(i==rotation) break;
-        Building build = nearby(i);
+        Building build = world.tiles.get(x,y).nearbyBuild(i);
         float in = efficiency(build);
         if(in > 0) {
           inner += in;
@@ -126,7 +126,7 @@ public class NearNerenergyConductor extends InnerenergyBlock {
       for(int i = 0;i<4;i++) {
       //如果是前方的方块，跳过
         if(i == rotation) break;
-        Building build = nearby(i);
+        Building build = world.tiles.get(x,y).nearbyBuild(i);
         if(build != null && build.isValid()) {
           if(getBuildingInnerenergy(build) > 0) {
             drawOtherConfigure(build);
@@ -139,7 +139,7 @@ public class NearNerenergyConductor extends InnerenergyBlock {
     @Override
     public boolean acceptInner(Building source,float amount) {
       //如果不是前方的方块，则返回false
-      if(source == front()) {
+      if(source.equals(front())) {
         return true;
       }
       return false;
