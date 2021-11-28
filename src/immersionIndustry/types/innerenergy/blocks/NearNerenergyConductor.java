@@ -74,7 +74,7 @@ public class NearNerenergyConductor extends InnerenergyBlock {
         return entity.progress;
       }
     }
-    Log.info("返回0","")
+    Log.info("返回0","");
     return 0;
   }
   @Override
