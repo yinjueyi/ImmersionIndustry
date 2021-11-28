@@ -36,7 +36,7 @@ import static arc.math.Angles.*;
 import immersionIndustry.IMColors;
 import immersionIndustry.contents.IMFx;
 
-public NearNerenergyConductor extends InnerenergyBlock {
+public class NearNerenergyConductor extends InnerenergyBlock {
   
   public NearNerenergyConductor(String name) {
     super(name);
