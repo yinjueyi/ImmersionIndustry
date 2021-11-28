@@ -74,6 +74,7 @@ public class NearNerenergyConductor extends InnerenergyBlock {
         return entity.progress;
       }
     }
+    Log.info("返回0","")
     return 0;
   }
   @Override
@@ -108,7 +109,6 @@ public class NearNerenergyConductor extends InnerenergyBlock {
         if(i==rotation) break;
         Building build = nearby(i);
         float in = efficiency(build);
-        Log.info("in的值:" + in,"");
         if(in > 0) {
           inner += in;
           addOtherInnerenergy(build,-in);
