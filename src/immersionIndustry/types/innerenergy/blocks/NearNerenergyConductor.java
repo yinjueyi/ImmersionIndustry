@@ -125,7 +125,7 @@ public class NearNerenergyConductor extends InnerenergyBlock {
       
       for(int i = 0;i<4;i++) {
       //如果是前方的方块，跳过
-        if(i == rotation) return;
+        if(i == rotation) break;
         Building build = nearby(i);
         if(build != null && build.isValid()) {
           if(getBuildingInnerenergy(build) > 0) {
@@ -143,6 +143,12 @@ public class NearNerenergyConductor extends InnerenergyBlock {
         return true;
       }
       return false;
+    }
+    
+    @Override
+    public float efficiency(Building build) {
+      float gap = getBuildingInnerenergy(build) - inner;
+      return gap * multiple;
     }
     
     public @Nullable InnerenergyBuilding front() {
