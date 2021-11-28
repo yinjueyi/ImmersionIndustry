@@ -5,6 +5,7 @@ import arc.scene.*;
 import arc.scene.style.*;
 import arc.graphics.*;
 import arc.graphics.g2d.*;
+import arc.math.geom.*;
 import arc.math.*;
 import arc.math.geom.Vec2;
 import arc.struct.*;
@@ -79,7 +80,7 @@ public class NearNerenergyConductor extends InnerenergyBlock {
   public void addOtherInnerenergy(Building build,float add) {
     if(build != null && build.isValid()) {
       if(build instanceof InnerenergyBuilding entity) {
-        if(entity.acceptInner(build,add)) entity.handleInner(build.add);
+        if(entity.acceptInner(build,add)) entity.handleInner(build,add);
       }
       if(build instanceof NuclearReactorBuild entity) {
         entity.heat += add;
@@ -103,10 +104,10 @@ public class NearNerenergyConductor extends InnerenergyBlock {
     @Override
     public void absorb() {
       //获取除前方以外的所有Building，提取内能
-      float in = 0;
       for(int i = 0;i<4;i++) {
         if(i==rotation) break;
-        float in = efficiency(left());
+        Building build = nearby(i);
+        float in = efficiency(build);
         if(in > 0) {
           inner += in;
           addOtherInnerenergy(build,-in);

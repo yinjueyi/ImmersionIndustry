@@ -84,7 +84,7 @@ public class InnerenergyBlock extends Block {
   public void addOtherInnerenergy(Building build,float add) {
     if(build != null && build.isValid()) {
       if(build instanceof InnerenergyBuilding entity) {
-        if(entity.acceptInner(build,add)) entity.handleInner(build.add);
+        if(entity.acceptInner(build,add)) entity.handleInner(build,add);
       }
     }
   }
