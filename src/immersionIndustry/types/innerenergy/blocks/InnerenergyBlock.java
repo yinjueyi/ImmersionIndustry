@@ -41,6 +41,7 @@ public class InnerenergyBlock extends Block {
   public float multiple = 0.01f;
   public float loss = 0.01f;
   public float lossInterval = 180f;
+  public float updateEffectChance = 0.04f;
   
   public InnerenergyBlock(String name) {
     super(name);
@@ -133,13 +134,19 @@ public class InnerenergyBlock extends Block {
         Building build = nearby(i);
         if(build != null && build.isValid()) {
           float in = efficiency(build);
-          if(in > 0) {
-            IMFx.absorptionHeat.at(this);
-          }else if(in < 0) {
-            IMFx.lossHeat.at(this);
-          }
+          absorbEffect(in > 0);
           inner += in;
           addOtherInnerenergy(build,-in);
+        }
+      }
+    }
+    
+    public void absorbEffect(boolean bool) {
+      if(Mathf.chanceDelta(updateEffectChance)){
+        if(bool) {
+          IMFx.absorptionHeat.at(this);
+        }else {
+          IMFx.lossHeat.at(this);
         }
       }
     }
