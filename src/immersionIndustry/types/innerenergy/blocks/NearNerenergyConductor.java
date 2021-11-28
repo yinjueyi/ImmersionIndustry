@@ -146,11 +146,11 @@ public class NearNerenergyConductor extends InnerenergyBlock {
     
     public @Nullable InnerenergyBuilding front() {
       int trns = block.size/2 + 1;
-      Building build nearby(Geometry.d4(rotation).x * trns, Geometry.d4(rotation).y * trns);
+      Building build = nearby(Geometry.d4(rotation).x * trns, Geometry.d4(rotation).y * trns);
       if(build instanceof InnerenergyBuilding entity) {
         return entity;
       }
-      return null
+      return null;
     }
     
   }
