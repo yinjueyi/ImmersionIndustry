@@ -55,22 +55,20 @@ public class IMFx implements ContentList {
   @Override
   public void load() {
     
-    absorptionHeat = new Effect(60f,e -> {
+    absorptionHeat = new Effect(30f,e -> {
       color(Color.orange,Color.white,e.fin());
-      randLenVectors(e.id, 2, 1f + 20f * e.fout(), e.rotation, 80f, (x, y) -> {
-        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 2f + 1f);
+      Fill.circle(e.x, e.y, 1 * e.fslope());
+      randLenVectors(e.id, 2, 1f + 20f * e.fout(), e.rotation, 60f, (x, y) -> {
+        lineAngle(e.x + x, e.y + y, Mathf.angle(x, y), e.fslope() * 1.2f + 0.5f);
       });
-      Draw.alpha(e.fin());
-      Fill.square(e.x,e.y,8);
     });
     
-    lossHeat = new Effect(60f,e -> {
+    lossHeat = new Effect(30f,e -> {
       color(Color.orange,Color.white,e.fin());
-      randLenVectors(e.id, 2, 1f + 20f * e.fout(), e.rotation, 80f, (x, y) -> {
-        lineAngle(e.x - x, e.y - y, Mathf.angle(x, y), e.fslope() * 2f + 1f);
+      Fill.circle(e.x, e.y, 1 * e.fslope());
+      randLenVectors(e.id, 2, 1f + 20f * e.fout(), e.rotation, 60f, (x, y) -> {
+        lineAngle(e.x - x, e.y - y, Mathf.angle(x, y), e.fslope() * 1.2f + 0.5f);
       });
-      Draw.alpha(e.fin());
-      Fill.square(e.x,e.y,8);
     });
     
     dispersion = new Effect(60f,e -> {
