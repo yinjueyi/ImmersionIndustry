@@ -48,11 +48,11 @@ public class IMBlocks implements ContentList {
   @Override
   public void load() {
     
-    nearNerenergyConductor = new NearNerenergyConductor("near-nerenergy-nonductor") {
+    nearNerenergyConductor = new NearNerenergyConductor("near-nerenergy-nonductor") {{
       health = 200*size*size;
       size = 1;
       requirements(Category.distribution, ItemStack.with(Items.silicon, 45,Items.titanium, 75,Items.lead,120));
-    }
+    }};
     
     innerenergyBlock = new InnerenergyBlock("innerenergy-block"){{
       health = 200*size*size;
