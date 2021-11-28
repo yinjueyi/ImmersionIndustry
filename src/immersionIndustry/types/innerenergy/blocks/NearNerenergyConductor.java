@@ -106,8 +106,9 @@ public class NearNerenergyConductor extends InnerenergyBlock {
       //获取除前方以外的所有Building，提取内能
       for(int i = 0;i<4;i++) {
         if(i==rotation) break;
-        Building build = tile.nearbyBuild(i);
+        Building build = nearby(i);
         float in = efficiency(build);
+        Log.info("in的值:" + in,null);
         if(in > 0) {
           inner += in;
           addOtherInnerenergy(build,-in);
@@ -126,7 +127,7 @@ public class NearNerenergyConductor extends InnerenergyBlock {
       for(int i = 0;i<4;i++) {
       //如果是前方的方块，跳过
         if(i == rotation) break;
-        Building build = tile.nearbyBuild(i);
+        Building build = nearby(i);
         if(build != null && build.isValid()) {
           if(getBuildingInnerenergy(build) > 0) {
             drawOtherConfigure(build);

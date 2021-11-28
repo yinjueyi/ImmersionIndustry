@@ -48,6 +48,7 @@ public class InnerenergyBlock extends Block {
     update = true;
     solid = true;
     sync = true;
+    configurable = true;
   }
   
   @Override
