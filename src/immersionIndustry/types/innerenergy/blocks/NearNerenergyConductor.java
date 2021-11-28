@@ -36,33 +36,21 @@ import static arc.math.Angles.*;
 import immersionIndustry.IMColors;
 import immersionIndustry.contents.IMFx;
 
-public class InnerenergyBlock extends Block {
+public NearNerenergyConductor extends InnerenergyBlock {
   
-  public float multiple = 0.01f;
-  public float loss = 0.01f;
-  public float lossInterval = 180f;
-  public float updateEffectChance = 0.04f;
-  
-  public InnerenergyBlock(String name) {
+  public NearNerenergyConductor(String name) {
     super(name);
     update = true;
     solid = true;
-    sync = true;
-  }
-  
-  @Override
-  public void setBars() {
-    bars.add(Core.bundle.get("stat.innerenergy"),(InnerenergyBuilding entity) -> new Bar(
-				() -> Core.bundle.get("stat.innerenergy"),
-				() -> Color.orange,
-				() -> entity.inner / 1)
-		);
+    rotate = true;
   }
   
   @Override
   public void drawPlace(int x, int y, int rotation, boolean valid) {
     super.drawPlace(x,y,rotation,valid);
     for(int i = 0;i<4;i++) {
+      //如果是前方的方块，跳过
+      if(i == rotation) return;
       Building build = world.tiles.get(x,y).nearbyBuild(i);
       if(build != null && build.isValid()) {
         if(getBuildingInnerenergy(build) > 0) {
@@ -72,104 +60,99 @@ public class InnerenergyBlock extends Block {
     }
   }
   
+  @Override
   public float getBuildingInnerenergy(Building build) {
     if(build != null && build.isValid()) {
       if(build instanceof InnerenergyBuilding entity) {
         return entity.inner;
       }
+      if(build instanceof NuclearReactorBuild entity) {
+        return entity.heat;
+      }
+      if(build instanceof GenericCrafterBuild entity) {
+        return entity.progress;
+      }
     }
     return 0;
   }
-  
+  @Override
   public void addOtherInnerenergy(Building build,float add) {
     if(build != null && build.isValid()) {
       if(build instanceof InnerenergyBuilding entity) {
         if(entity.acceptInner(build,add)) entity.handleInner(build.add);
       }
+      if(build instanceof NuclearReactorBuild entity) {
+        entity.heat += add;
+      }
+      if(build instanceof GenericCrafterBuild entity) {
+        entity.progress += add;
+      }
     }
   }
   
+  @Override
   public void drawOtherConfigure(Building build) {
-    Draw.color(Pal.accent);
+    Draw.color(Pal.breakInvalid);
     Lines.stroke(1f);
     Lines.square(build.x, build.y, build.block.size * tilesize / 2f + 1f);
     Draw.reset();
   }
   
-  public class InnerenergyBuilding extends Building {
-    
-    float inner = 0;
+  public class ConductorBuilding extends InnerenergyBuilding {
     
     @Override
-    public void updateTile() {
-      wastage();
-      absorb();
-    }
-    
-    public void wastage() {
-      if(timer(timerDump,lossInterval)) {
-        if(inner <= 0) return;
-        float l = inner*loss;
-        if(inner < l) {
-          inner = 0;
-        }else {
-          inner -= l;
-        }
-      }
-    }
-    
     public void absorb() {
+      //获取除前方以外的所有Building，提取内能
+      float in = 0;
       for(int i = 0;i<4;i++) {
-        Building build = nearby(i);
-        if(build != null && build.isValid()) {
-          float in = efficiency(build);
-          absorbEffect(in > 0);
+        if(i==rotation) break;
+        float in = efficiency(left());
+        if(in > 0) {
           inner += in;
           addOtherInnerenergy(build,-in);
         }
-      }
-    }
-    
-    public void absorbEffect(boolean bool) {
-      if(Mathf.chanceDelta(updateEffectChance)){
-        if(bool) {
-          IMFx.absorptionHeat.at(this);
-        }else {
-          IMFx.lossHeat.at(this);
-        }
+
       }
     }
     
     @Override
     public void drawConfigure() {
+      InnerenergyBuilding front = front();
+      if(front!=null&&front.isValid()) {
+        Drawf.select(front.x, front.y,front.block.size * tilesize / 2f + 2f + Mathf.absin(Time.time, 4f, 1f),Pal.place);
+      }
+      
       for(int i = 0;i<4;i++) {
+      //如果是前方的方块，跳过
+        if(i == rotation) return;
         Building build = nearby(i);
         if(build != null && build.isValid()) {
-          if(getBuildingInnerenergy(build) < inner) {
+          if(getBuildingInnerenergy(build) > 0) {
             drawOtherConfigure(build);
-          }else {
-            Drawf.select(build.x, build.y,build.block.size * tilesize / 2f + 2f + Mathf.absin(Time.time, 4f, 1f),Pal.breakInvalid);
           }
         }
       }
+      
     }
     
-    /*
-    *效率，如果被禁用，返回0。根据两个Building间的内能差距判断效率。
-    */
-    public float efficiency(Building build) {
-      float gap = getBuildingInnerenergy(build) - inner;
-      return gap * multiple;
-    }
-    
-    //是否可增加或减少内能，默认true
+    @Override
     public boolean acceptInner(Building source,float amount) {
-      return true;
+      //如果不是前方的方块，则返回false
+      if(source == front()) {
+        return true;
+      }
+      return false;
     }
     
-    public void handleInner(Building source,float amount) {
-      inner += amount;
+    public @Nullable InnerenergyBuilding front() {
+      int trns = block.size/2 + 1;
+      Building build nearby(Geometry.d4(rotation).x * trns, Geometry.d4(rotation).y * trns);
+      if(build instanceof InnerenergyBuilding entity) {
+        return entity;
+      }
+      return null
     }
     
   }
+  
 }
