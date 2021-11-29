@@ -107,7 +107,10 @@ public class IntelligentMiningMachine extends Block {
           res.update(this);
         });
       }
-      dump();
+      //每种物品输出一个
+      items.each((item,amount) -> {
+        dump(item);
+      });
     }
     
     @Override
