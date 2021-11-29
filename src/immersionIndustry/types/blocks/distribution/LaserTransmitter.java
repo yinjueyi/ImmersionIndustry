@@ -71,7 +71,7 @@ public class LaserTransmitter extends Block {
         Tile tile = world.tile(x+i, y);
         if(tile.block() != null && tile.block().hasItems) {
           tile.build.drawConfigure();
-          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
+          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),y* tilesize + offset);
           return;
         }
       }
@@ -81,7 +81,7 @@ public class LaserTransmitter extends Block {
         Tile tile = world.tile(x, y+i);
         if(tile.block() != null && tile.block().hasItems) {
           tile.build.drawConfigure();
-          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
+          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,x * tilesize + offset,tile.drawy());
           return;
         }
       }
@@ -91,7 +91,7 @@ public class LaserTransmitter extends Block {
         Tile tile = world.tile(x-i, y);
         if(tile.block() != null && tile.block().hasItems) {
           tile.build.drawConfigure();
-          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
+          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,x * tilesize + offset,tile.drawy());
           return;
         }
       }
@@ -101,7 +101,7 @@ public class LaserTransmitter extends Block {
         Tile tile = world.tile(x, y-i);
         if(tile.block() != null && tile.block().hasItems) {
           tile.build.drawConfigure();
-          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),tile.drawy());
+          Drawf.dashLine(IMColors.colorYellow,x * tilesize + offset,y * tilesize + offset,tile.drawx(),y * tilesize + offset);
           return;
         }
       }
@@ -123,9 +123,9 @@ public class LaserTransmitter extends Block {
           if(target.build.acceptItem(this,item)) {
             float time = Mathf.dstm(x,y,target.drawx(),target.drawy()) / tilesize * speed / efficiency();
             IMFx.takeItemEffect(x,y,target.drawx(),target.drawy(),item.color,time);
+            target.build.handleItem(this,item);
+            items.remove(item,1);
             Time.run(time,() -> {
-              target.build.handleItem(this,item);
-              items.remove(item,1);
               craftEffect.at(this);
             });
           }
