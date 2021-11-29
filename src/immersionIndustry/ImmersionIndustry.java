@@ -17,6 +17,7 @@ import mindustry.ui.dialogs.*;
 
 //导入模组类
 import immersionIndustry.contents.blocks.IMBlocks;
+import immersionIndustry.contents.IMTechTree;
 import immersionIndustry.contents.IMItems;
 import immersionIndustry.contents.IMFx;
 import immersionIndustry.contents.IMBullets;
@@ -31,6 +32,7 @@ public class ImmersionIndustry extends Mod{
       new IMBullets().load();
       new IMItems().load();
       new IMBlocks().load();
+      new IMTechTree().load();
     }
 	
 }
