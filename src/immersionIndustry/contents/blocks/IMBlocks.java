@@ -42,7 +42,7 @@ import immersionIndustry.types.innerenergy.blocks.*;
 //实现ContentList
 public class IMBlocks implements ContentList {
   
-  public static Block t1ChipFactory,collapseExtractor,collapseQuantumCultivation,auroraGuide,innerenergyBlock,nearNerenergyConductor;
+  public static Block t1ChipFactory,collapseExtractor,collapseQuantumCultivation,auroraGuide,innerEnergyPipe,nearNerenergyConductor;
   
   //在这里创建变量
   @Override
@@ -55,10 +55,10 @@ public class IMBlocks implements ContentList {
       consumes.power(1);
     }};
     
-    innerenergyBlock = new InnerenergyBlock("innerenergy-block"){{
+    innerEnergyPipe = new InnerenergyBlock("inner-energy-pipe"){{
       health = 200*size*size;
       size = 1;
-      requirements(Category.power, ItemStack.with(Items.silicon, 45,Items.titanium, 75,Items.lead,120));
+      requirements(Category.power, ItemStack.with(Items.copper, 6,Items.lead,6));
     }};
     
     auroraGuide = new LaserTransmitter("aurora-guide"){{
