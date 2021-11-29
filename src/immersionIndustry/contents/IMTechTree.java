@@ -35,28 +35,27 @@ import static mindustry.content.TechTree.*;
 import static immersionIndustry.contents.IMItems.*;
 import static immersionIndustry.contents.blocks.IMBlocks.*;
 
-public class IMTechTree extends TechTree {
+public class IMTechTree implements ContentList {
   
   @Override
   public void load() {
     //方块
-    get(Blocks.coreShard).children.add(node(t1ChipFactory,() -> {
-      node(auroraGuide);
-      node(nearNerenergyConductor);
-      node(collapseQuantumCultivation);
-      node(collapseExtractor);
-    }));
+    node(Blocks.coreShard,t1ChipFactory);
+    node(t1ChipFactory,auroraGuide);
+    node(t1ChipFactory,nearNerenergyConductor);
+    node(t1ChipFactory,collapseQuantumCultivation);
+    node(t1ChipFactory,collapseExtractor);
     
     //物品
-    get(Items.copper).children.add(nodeProduce(IMItems.t1BasicChip,() -> {
-      nodeProduce(cuTiAlloy,() -> {
-        nodeProduce(thTiAlloy,() -> {
-          nodeProduce(collapseQuantum,() -> {
-            
-          });
-        });
-      });
-    }));
+    node(Items.copper,t1BasicChip);
+    node(t1BasicChip,cuTiAlloy);
+    node(cuTiAlloy,thTiAlloy);
+    node(thTiAlloy,collapseQuantum);
     
   }
+  
+  static TechNode node(UnlockableContent parent, UnlockableContent content) {
+    new TechNode(get(parent),content,content.mresearchRequirements());
+  }
+  
 }
