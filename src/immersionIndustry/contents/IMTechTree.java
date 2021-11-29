@@ -5,7 +5,6 @@ import arc.graphics.*;
 import arc.graphics.g2d.*;
 import mindustry.ctype.*;
 import mindustry.content.*;
-import mindustry.content.TechTree.*;
 
 import mindustry.entities.*;
 import mindustry.entities.bullet.*;
@@ -31,12 +30,10 @@ import mindustry.world.blocks.units.*;
 import mindustry.world.consumers.*;
 import mindustry.world.draw.*;
 import mindustry.world.meta.*;
+import static mindustry.content.TechTree.*;
 
-import immersionIndustry.contents.IMItems;
-import immersionIndustry.contents.IMFx;
-import immersionIndustry.contents.drawer.*;
-import static immersionIndustry.contents.IMItems;
-import static immersionIndustry.contents.blocks.IMBlocks;
+import static immersionIndustry.contents.IMItems.*;
+import static immersionIndustry.contents.blocks.IMBlocks.*;
 
 public class IMTechTree implements ContentList {
   
