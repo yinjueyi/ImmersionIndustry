@@ -60,4 +60,41 @@ public class IMTechTree implements ContentList {
     
   }
   
+  static TechNode node(UnlockableContent content, Runnable children){
+    return node(content, content.researchRequirements(), children);
+  }
+
+  static TechNode node(UnlockableContent content, ItemStack[] requirements, Runnable children){
+    return node(content, requirements, null, children);
+  }
+
+  static TechNode node(UnlockableContent content, ItemStack[] requirements, Seq<Objective> objectives, Runnable children){
+    TechNode node = new TechNode(context, content, requirements);
+    if(objectives != null){
+      node.objectives.addAll(objectives);
+    }
+
+    TechNode prev = context;
+    context = node;
+    children.run();
+    context = prev;
+    return node;
+  }
+
+  static TechNode node(UnlockableContent content, Seq<Objective> objectives, Runnable children){
+    return node(content, content.researchRequirements(), objectives, children);
+  }
+
+  static TechNode node(UnlockableContent block){
+    return node(block, () -> {});
+  }
+
+  static TechNode nodeProduce(UnlockableContent content, Seq<Objective> objectives, Runnable children){
+    return node(content, content.researchRequirements(), objectives.and(new Produce(content)), children);
+  }
+
+  static TechNode nodeProduce(UnlockableContent content, Runnable children){
+    return nodeProduce(content, new Seq<>(), children);
+  }
+  
 }
