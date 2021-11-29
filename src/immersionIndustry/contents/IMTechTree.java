@@ -55,7 +55,7 @@ public class IMTechTree implements ContentList {
   }
   
   static TechNode node(UnlockableContent parent, UnlockableContent content) {
-    new TechNode(get(parent),content,content.mresearchRequirements());
+    return new TechNode(get(parent),content,content.mresearchRequirements());
   }
   
 }
