@@ -51,19 +51,20 @@ public class IMBlocks implements ContentList {
     nearNerenergyConductor = new NearNerenergyConductor("near-nerenergy-nonductor") {{
       health = 200*size*size;
       size = 1;
-      requirements(Category.distribution, ItemStack.with(Items.silicon, 45,Items.titanium, 75,Items.lead,120));
+      requirements(Category.power, ItemStack.with(Items.silicon, 15,IMItems.t1BasicChip, 5,Items.lead,60));
+      consumes.power(1);
     }};
     
     innerenergyBlock = new InnerenergyBlock("innerenergy-block"){{
       health = 200*size*size;
       size = 1;
-      requirements(Category.distribution, ItemStack.with(Items.silicon, 45,Items.titanium, 75,Items.lead,120));
+      requirements(Category.power, ItemStack.with(Items.silicon, 45,Items.titanium, 75,Items.lead,120));
     }};
     
     auroraGuide = new LaserTransmitter("aurora-guide"){{
       health = 200*size*size;
       size = 1;
-      requirements(Category.distribution, ItemStack.with(Items.silicon, 45,Items.titanium, 75,Items.lead,120));
+      requirements(Category.distribution, ItemStack.with(Items.silicon, 35,Items.copper, 75,Items.lead,60,IMItems.t1BasicChip,6,IMItems.cuTiAlloy,6));
       consumes.power(2);
     }};
     
@@ -89,7 +90,7 @@ public class IMBlocks implements ContentList {
     }};
     
     collapseExtractor = new IntelligentMiningMachine("collapse-extractor"){{
-      requirements(Category.production, ItemStack.with(Items.silicon, 95,Items.titanium, 125,Items.surgeAlloy, 42,IMItems.collapseQuantum,32,IMItems.t1BasicChip,42));
+      requirements(Category.production, ItemStack.with(Items.silicon, 95,IMItems.thTiAlloy, 95,Items.surgeAlloy, 182,IMItems.collapseQuantum,32,IMItems.t1BasicChip,52));
       consumes.power(30);
       health = 200*size*size;
       size = 3;
